@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Willow Care Co. — Precision Care Navigation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --sage:       #7A8C6E;
+    --sage-light: #B5C4A8;
+    --sage-pale:  #EDF1E9;
+    --warm:       #C4A882;
+    --warm-pale:  #F7F1E8;
+    --ink:        #1C2018;
+    --ink-soft:   #3D4237;
+    --mist:       #F4F5F1;
+    --white:      #FAFAF8;
+    --serif:      'Cormorant Garamond', Georgia, serif;
+    --sans:       'DM Sans', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--white);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.4rem 4rem;
+    background: rgba(250,250,248,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(122,140,110,0.12);
+    animation: fadeDown 0.8s ease both;
+  }
+
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--sage); }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.82rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--sage); }
+
+  .nav-cta {
+    background: var(--sage);
+    color: var(--white) !important;
+    padding: 0.6rem 1.4rem;
+    border-radius: 2rem;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--ink) !important; color: var(--white) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 5rem;
+    background: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -120px; right: -120px;
+    width: 560px; height: 560px;
+    background: radial-gradient(circle, rgba(181,196,168,0.22) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5rem 3rem 5rem 4rem;
+    animation: fadeUp 1s 0.2s ease both;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 1.6rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 28px; height: 1px;
+    background: var(--sage);
+  }
+
+  .hero-headline {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 5vw, 5.2rem);
+    font-weight: 300;
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 1.8rem;
+  }
+  .hero-headline em {
+    font-style: italic;
+    color: var(--sage);
+  }
+
+  .hero-sub {
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+    max-width: 420px;
+    line-height: 1.75;
+    margin-bottom: 2.6rem;
+  }
+
+  .hero-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+
+  .btn-primary {
+    background: var(--sage);
+    color: var(--white);
+    padding: 0.9rem 2rem;
+    border-radius: 2rem;
+    font-size: 0.88rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: background 0.25s, transform 0.2s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--ink); transform: translateY(-1px); }
+
+  .btn-ghost {
+    color: var(--ink-soft);
+    font-size: 0.88rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: color 0.2s;
+  }
+  .btn-ghost::after { content: '→'; transition: transform 0.2s; }
+  .btn-ghost:hover { color: var(--sage); }
+  .btn-ghost:hover::after { transform: translateX(4px); }
+
+  .hero-trust {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(122,140,110,0.18);
+    display: flex;
+    gap: 2.5rem;
+  }
+  .trust-item { display: flex; flex-direction: column; }
+  .trust-num {
+    font-family: var(--serif);
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .trust-label {
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    margin-top: 0.3rem;
+  }
+
+  .hero-right {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 4rem 4rem 2rem;
+    animation: fadeUp 1s 0.4s ease both;
+  }
+
+  .hero-img-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+  }
+
+  .hero-img-bg {
+    position: absolute;
+    inset: -24px -24px 0 24px;
+    background: var(--sage-pale);
+    border-radius: 2rem;
+    z-index: 0;
+  }
+
+  .hero-img {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    aspect-ratio: 4/5;
+    background: linear-gradient(135deg, #c8d5be 0%, #a8bc9a 40%, #8fa882 100%);
+    border-radius: 1.5rem;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  /* Illustrated willow scene inside hero image */
+  .hero-img svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero-badge {
+    position: absolute;
+    bottom: -1.5rem;
+    left: -2rem;
+    z-index: 2;
+    background: var(--white);
+    border-radius: 1.2rem;
+    padding: 1rem 1.4rem;
+    box-shadow: 0 8px 32px rgba(28,32,24,0.12);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    min-width: 220px;
+  }
+
+  .badge-icon {
+    width: 40px; height: 40px;
+    background: var(--sage-pale);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+
+  .badge-text strong {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+  .badge-text span {
+    font-size: 0.73rem;
+    color: var(--ink-soft);
+  }
+
+  /* ── MARQUEE ── */
+  .marquee-strip {
+    background: var(--sage);
+    padding: 0.9rem 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .marquee-inner {
+    display: inline-flex;
+    gap: 3rem;
+    animation: marquee 28s linear infinite;
+  }
+  .marquee-inner span {
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.85);
+  }
+  .marquee-inner .dot {
+    color: rgba(255,255,255,0.4);
+    font-size: 0.5rem;
+    vertical-align: middle;
+  }
+
+  /* ── ABOUT ── */
+  .about {
+    padding: 8rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    background: var(--warm-pale);
+  }
+
+  .section-tag {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .section-tag::before {
+    content: '';
+    width: 20px; height: 1px;
+    background: var(--sage);
+  }
+
+  .section-headline {
+    font-family: var(--serif);
+    font-size: clamp(2.2rem, 3.5vw, 3.4rem);
+    font-weight: 300;
+    line-height: 1.12;
+    color: var(--ink);
+    margin-bottom: 1.6rem;
+  }
+  .section-headline em { font-style: italic; color: var(--sage); }
+
+  .about-body p {
+    font-size: 1rem;
+    color: var(--ink-soft);
+    line-height: 1.8;
+    margin-bottom: 1.2rem;
+  }
+
+  .about-body strong { color: var(--ink); font-weight: 500; }
+
+  .about-visual {
+    position: relative;
+  }
+
+  .about-card {
+    background: var(--white);
+    border-radius: 1.5rem;
+    padding: 2.4rem;
+    box-shadow: 0 4px 24px rgba(28,32,24,0.07);
+  }
+
+  .about-card-quote {
+    font-family: var(--serif);
+    font-size: 1.55rem;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--ink);
+    line-height: 1.5;
+    margin-bottom: 1.8rem;
+  }
+
+  .about-card-author {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .author-avatar {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--sage-light), var(--sage));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    color: white;
+    font-weight: 600;
+  }
+
+  .author-info strong {
+    display: block;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .author-info span {
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+  }
+
+  .about-accent {
+    position: absolute;
+    top: -1.5rem; right: -1.5rem;
+    width: 120px; height: 120px;
+    background: var(--sage-pale);
+    border-radius: 50%;
+    z-index: -1;
+  }
+
+  /* ── SERVICES ── */
+  .services {
+    padding: 8rem 4rem;
+    background: var(--white);
+  }
+
+  .services-header {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 5rem;
+  }
+
+  .services-header p {
+    font-size: 1rem;
+    color: var(--ink-soft);
+    margin-top: 1rem;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .service-card {
+    background: var(--mist);
+    border-radius: 1.2rem;
+    padding: 2rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 0;
+    background: var(--sage);
+    transition: height 0.4s ease;
+    border-radius: 0 0 3px 0;
+  }
+
+  .service-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(28,32,24,0.1); }
+  .service-card:hover::before { height: 100%; }
+
+  .service-icon {
+    font-size: 1.8rem;
+    margin-bottom: 1.2rem;
+    display: block;
+  }
+
+  .service-title {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.7rem;
+    line-height: 1.3;
+  }
+
+  .service-desc {
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    line-height: 1.7;
+  }
+
+  .service-card.featured {
+    background: var(--sage);
+    color: white;
+  }
+  .service-card.featured .service-title { color: white; }
+  .service-card.featured .service-desc { color: rgba(255,255,255,0.82); }
+  .service-card.featured::before { background: var(--warm); }
+
+  /* ── HOW IT WORKS ── */
+  .how {
+    padding: 8rem 4rem;
+    background: var(--sage-pale);
+  }
+
+  .how-header {
+    text-align: center;
+    max-width: 580px;
+    margin: 0 auto 5rem;
+  }
+  .how-header p { color: var(--ink-soft); margin-top: 1rem; }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .steps::before {
+    content: '';
+    position: absolute;
+    top: 2rem;
+    left: calc(12.5% + 1rem);
+    right: calc(12.5% + 1rem);
+    height: 1px;
+    background: repeating-linear-gradient(90deg, var(--sage) 0, var(--sage) 6px, transparent 6px, transparent 14px);
+    z-index: 0;
+  }
+
+  .step {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .step-num {
+    width: 4rem; height: 4rem;
+    background: var(--white);
+    border: 2px solid var(--sage);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.4rem;
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--sage);
+  }
+
+  .step-title {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+
+  .step-desc {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    line-height: 1.65;
+  }
+
+  /* ── AUDIENCE CALLOUT ── */
+  .audience {
+    padding: 8rem 4rem;
+    background: var(--ink);
+    color: var(--white);
+  }
+
+  .audience-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .audience-tag {
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--sage-light);
+    margin-bottom: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  .audience-tag::before, .audience-tag::after {
+    content: '';
+    width: 20px; height: 1px;
+    background: var(--sage-light);
+  }
+
+  .audience-headline {
+    font-family: var(--serif);
+    font-size: clamp(2.4rem, 4vw, 4rem);
+    font-weight: 300;
+    line-height: 1.12;
+    margin-bottom: 1.8rem;
+  }
+  .audience-headline em { font-style: italic; color: var(--sage-light); }
+
+  .audience-sub {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.65);
+    max-width: 580px;
+    margin: 0 auto 3rem;
+    line-height: 1.8;
+  }
+
+  .audience-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 4rem;
+    text-align: left;
+  }
+
+  .audience-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 1rem;
+    padding: 1.8rem;
+  }
+
+  .audience-card-icon { font-size: 1.6rem; margin-bottom: 1rem; }
+
+  .audience-card h4 {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 0.6rem;
+  }
+
+  .audience-card p {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.7;
+  }
+
+  /* ── MEET SHELBY ── */
+  .meet {
+    padding: 8rem 4rem;
+    background: var(--warm-pale);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .meet-visual {
+    position: relative;
+  }
+
+  .meet-photo {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: linear-gradient(160deg, #b5c4a8 0%, #7a8c6e 60%, #5a6b52 100%);
+    border-radius: 2rem 2rem 6rem 2rem;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .meet-photo-placeholder {
+    font-family: var(--serif);
+    font-size: 5rem;
+    color: rgba(255,255,255,0.5);
+    font-style: italic;
+  }
+
+  .meet-credentials {
+    position: absolute;
+    bottom: -1rem;
+    right: -1.5rem;
+    background: var(--white);
+    border-radius: 1rem;
+    padding: 1.2rem 1.6rem;
+    box-shadow: 0 8px 32px rgba(28,32,24,0.1);
+  }
+
+  .cred-item {
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    padding: 0.25rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .cred-item::before { content: '✓'; color: var(--sage); font-weight: 700; }
+
+  .meet-body {}
+
+  .meet-body p {
+    font-size: 1rem;
+    color: var(--ink-soft);
+    line-height: 1.8;
+    margin-bottom: 1.2rem;
+  }
+
+  .experience-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.8rem;
+  }
+
+  .exp-tag {
+    background: var(--sage-pale);
+    color: var(--sage);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    padding: 0.4rem 1rem;
+    border-radius: 2rem;
+    border: 1px solid rgba(122,140,110,0.2);
+  }
+
+  /* ── CTA ── */
+  .cta-section {
+    padding: 8rem 4rem;
+    background: var(--white);
+    text-align: center;
+  }
+
+  .cta-inner {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .cta-inner .section-headline { margin-bottom: 1rem; }
+
+  .cta-inner p {
+    font-size: 1rem;
+    color: var(--ink-soft);
+    line-height: 1.75;
+    margin-bottom: 2.5rem;
+  }
+
+  .cta-form {
+    display: flex;
+    gap: 0.8rem;
+    max-width: 460px;
+    margin: 0 auto;
+  }
+
+  .cta-form input {
+    flex: 1;
+    padding: 0.85rem 1.4rem;
+    border: 1.5px solid rgba(122,140,110,0.3);
+    border-radius: 2rem;
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    color: var(--ink);
+    background: var(--white);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .cta-form input:focus { border-color: var(--sage); }
+  .cta-form input::placeholder { color: rgba(61,66,55,0.45); }
+
+  .cta-note {
+    font-size: 0.75rem;
+    color: rgba(61,66,55,0.5);
+    margin-top: 1rem;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    color: rgba(255,255,255,0.6);
+    padding: 3rem 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-logo {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--white);
+  }
+  .footer-logo span { color: var(--sage-light); }
+
+  .footer-links { display: flex; gap: 1.8rem; }
+  .footer-links a {
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--sage-light); }
+
+  .footer-legal {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.3);
+    line-height: 1.6;
+    max-width: 380px;
+    text-align: right;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 1.8rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; padding-top: 5rem; }
+    .hero-right { display: none; }
+    .hero-left { padding: 4rem 1.8rem; }
+    .about, .meet { grid-template-columns: 1fr; padding: 4rem 1.8rem; gap: 3rem; }
+    .services { padding: 4rem 1.8rem; }
+    .services-grid { grid-template-columns: 1fr 1fr; }
+    .steps { grid-template-columns: 1fr 1fr; }
+    .steps::before { display: none; }
+    .audience { padding: 4rem 1.8rem; }
+    .audience-cards { grid-template-columns: 1fr; }
+    .cta-section { padding: 4rem 1.8rem; }
+    .cta-form { flex-direction: column; }
+    footer { flex-direction: column; text-align: center; }
+    .footer-legal { text-align: center; max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Willow<span>Care</span> Co.</a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#about">About Shelby</a></li>
+    <li><a href="#contact" class="nav-cta">Get Started</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Florida Precision Care Navigation</div>
+    <h1 class="hero-headline">
+      Your parent deserves<br/>
+      someone who speaks<br/>
+      <em>the language.</em>
+    </h1>
+    <p class="hero-sub">
+      When a diagnosis lands, a discharge happens too fast, or the system just stops making sense — Willow Care Co. steps in. A nurse-led care navigation service built for families who need more than a referral.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Book a Consultation</a>
+      <a href="#services" class="btn-ghost">See how we help</a>
+    </div>
+    <div class="hero-trust">
+      <div class="trust-item">
+        <span class="trust-num">20+</span>
+        <span class="trust-label">Years clinical experience</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-num">10</span>
+        <span class="trust-label">Specialties navigated</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-num">FL</span>
+        <span class="trust-label">Licensed & insured</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-img-wrap">
+      <div class="hero-img-bg"></div>
+      <div class="hero-img">
+        <!-- Illustrated willow scene -->
+        <svg viewBox="0 0 480 600" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+          <rect width="480" height="600" fill="url(#heroGrad)"/>
+          <defs>
+            <linearGradient id="heroGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#c8d9be"/>
+              <stop offset="100%" stop-color="#7a8c6e"/>
+            </linearGradient>
+          </defs>
+          <!-- ground -->
+          <ellipse cx="240" cy="560" rx="200" ry="40" fill="rgba(255,255,255,0.12)"/>
+          <!-- trunk -->
+          <rect x="228" y="220" width="24" height="340" rx="12" fill="rgba(255,255,255,0.25)"/>
+          <!-- willow branches -->
+          <g stroke="rgba(255,255,255,0.35)" stroke-width="2.5" fill="none" stroke-linecap="round">
+            <path d="M240,240 Q180,320 160,460"/>
+            <path d="M240,240 Q200,330 185,470"/>
+            <path d="M240,240 Q220,340 215,480"/>
+            <path d="M240,240 Q260,340 265,480"/>
+            <path d="M240,240 Q280,330 295,470"/>
+            <path d="M240,240 Q300,320 320,460"/>
+            <path d="M240,250 Q150,310 130,440"/>
+            <path d="M240,250 Q330,310 350,440"/>
+          </g>
+          <!-- canopy -->
+          <ellipse cx="240" cy="200" rx="130" ry="110" fill="rgba(255,255,255,0.15)"/>
+          <ellipse cx="240" cy="190" rx="100" ry="85" fill="rgba(255,255,255,0.12)"/>
+        </svg>
+      </div>
+      <div class="hero-badge">
+        <div class="badge-icon">🌿</div>
+        <div class="badge-text">
+          <strong>Nurse-led. Family-focused.</strong>
+          <span>Serving Florida families</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-inner">
+    <span>Care Navigation</span><span class="dot">●</span>
+    <span>Appointment Support</span><span class="dot">●</span>
+    <span>Discharge Planning</span><span class="dot">●</span>
+    <span>Senior Advocacy</span><span class="dot">●</span>
+    <span>Surgical Follow-Up</span><span class="dot">●</span>
+    <span>Family Education</span><span class="dot">●</span>
+    <span>Specialist Coordination</span><span class="dot">●</span>
+    <span>Health Binder Creation</span><span class="dot">●</span>
+    <span>Wellness Consulting</span><span class="dot">●</span>
+    <!-- duplicate for seamless loop -->
+    <span>Care Navigation</span><span class="dot">●</span>
+    <span>Appointment Support</span><span class="dot">●</span>
+    <span>Discharge Planning</span><span class="dot">●</span>
+    <span>Senior Advocacy</span><span class="dot">●</span>
+    <span>Surgical Follow-Up</span><span class="dot">●</span>
+    <span>Family Education</span><span class="dot">●</span>
+    <span>Specialist Coordination</span><span class="dot">●</span>
+    <span>Health Binder Creation</span><span class="dot">●</span>
+    <span>Wellness Consulting</span><span class="dot">●</span>
+  </div>
+</div>
+
+<!-- ABOUT / PROBLEM -->
+<section class="about reveal" id="about-intro">
+  <div class="about-body">
+    <div class="section-tag">The Problem We Solve</div>
+    <h2 class="section-headline">The system moves fast.<br/><em>Families get left behind.</em></h2>
+    <p>Your parent gets discharged with a stack of papers. The doctor spoke for six minutes. The specialist appointment is in three weeks and nobody explained what happens until then.</p>
+    <p>You're juggling your job, your kids, and your own life — while trying to make sense of medication changes, referral networks, and care plans written in language designed for clinicians, not families.</p>
+    <p><strong>That's where we come in.</strong> Willow Care Co. is a nurse-led navigation service. We don't replace your parent's medical team. We make sure your family can actually work with them.</p>
+  </div>
+
+  <div class="about-visual">
+    <div class="about-accent"></div>
+    <div class="about-card">
+      <p class="about-card-quote">"I finally felt like someone understood what was happening with my dad — and cared enough to explain it to us."</p>
+      <div class="about-card-author">
+        <div class="author-avatar">M</div>
+        <div class="author-info">
+          <strong>Maria T.</strong>
+          <span>Daughter of a Willow Care client, Jacksonville FL</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services reveal" id="services">
+  <div class="services-header">
+    <div class="section-tag" style="justify-content:center;">What We Offer</div>
+    <h2 class="section-headline">Tailored care packages,<br/><em>built around your family.</em></h2>
+    <p>Every engagement is custom. No two care packages look the same because no two families — and no two patients — are the same.</p>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <span class="service-icon">🏥</span>
+      <h3 class="service-title">Appointment Navigation</h3>
+      <p class="service-desc">We attend physician visits with your loved one, take detailed notes, translate clinical language into plain English, and debrief the family after.</p>
+    </div>
+
+    <div class="service-card featured">
+      <span class="service-icon">📋</span>
+      <h3 class="service-title">Personalized Care Packages</h3>
+      <p class="service-desc">A complete health binder: diagnosis summaries, medication lists, specialist contacts, care timelines, and action steps — all in one organized place.</p>
+    </div>
+
+    <div class="service-card">
+      <span class="service-icon">🚗</span>
+      <h3 class="service-title">Discharge & Transition Support</h3>
+      <p class="service-desc">Hospitals discharge fast. We make sure your family knows exactly what happens next — follow-up care, warning signs, and who to call.</p>
+    </div>
+
+    <div class="service-card">
+      <span class="service-icon">👥</span>
+      <h3 class="service-title">Specialist Coordination</h3>
+      <p class="service-desc">We bridge the gap between your primary provider and the specialists — ensuring everyone has the information they need to care for your loved one.</p>
+    </div>
+
+    <div class="service-card">
+      <span class="service-icon">🌿</span>
+      <h3 class="service-title">Senior Patient Advocacy</h3>
+      <p class="service-desc">For aging parents managing chronic conditions, we serve as a consistent, knowledgeable presence who tracks changes, flags concerns, and keeps families informed.</p>
+    </div>
+
+    <div class="service-card">
+      <span class="service-icon">💼</span>
+      <h3 class="service-title">Employer Wellness Consulting</h3>
+      <p class="service-desc">For small businesses, we build customized employee wellness programs rooted in clinical experience and occupational health expertise.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how reveal" id="how">
+  <div class="how-header">
+    <div class="section-tag" style="justify-content:center;">The Process</div>
+    <h2 class="section-headline">Simple, personal,<br/><em>built around you.</em></h2>
+    <p>We make it easy to get started, and we're with you every step of the way.</p>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h4 class="step-title">Connect</h4>
+      <p class="step-desc">Book a free 20-minute consultation. Tell us about your family's situation.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h4 class="step-title">Assess</h4>
+      <p class="step-desc">We review records, understand the history, and identify the gaps.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h4 class="step-title">Build</h4>
+      <p class="step-desc">A custom care package is created specifically for your loved one.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <h4 class="step-title">Navigate</h4>
+      <p class="step-desc">We walk alongside your family — in appointments, transitions, and beyond.</p>
+    </div>
+  </div>
+</section>
+
+<!-- AUDIENCE CALLOUT -->
+<section class="audience reveal">
+  <div class="audience-inner">
+    <div class="audience-tag">This is for you if...</div>
+    <h2 class="audience-headline">You love them.<br/><em>You just can't do it alone.</em></h2>
+    <p class="audience-sub">
+      Managing a parent's health from a distance — or even up close — is one of the hardest things a family faces. You don't need to figure it out alone.
+    </p>
+    <div class="audience-cards">
+      <div class="audience-card">
+        <div class="audience-card-icon">👨‍👩‍👧</div>
+        <h4>The Long-Distance Family</h4>
+        <p>You live hours away and worry every time the phone rings. We're the eyes and ears on the ground you didn't know you could have.</p>
+      </div>
+      <div class="audience-card">
+        <div class="audience-card-icon">🏠</div>
+        <h4>The Sandwich Generation</h4>
+        <p>Balancing your kids and your parents at once. We take the medical coordination off your plate so you can show up as a child again.</p>
+      </div>
+      <div class="audience-card">
+        <div class="audience-card-icon">🩺</div>
+        <h4>The Newly Diagnosed</h4>
+        <p>A new diagnosis changes everything. We help your family understand what's ahead and navigate the system with confidence.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MEET SHELBY -->
+<section class="reveal" id="about">
+  <div class="meet">
+    <div class="meet-visual">
+      <div class="meet-photo">
+        <span class="meet-photo-placeholder">S</span>
+      </div>
+      <div class="meet-credentials">
+        <div class="cred-item">Licensed Practical Nurse (LPN), Florida</div>
+        <div class="cred-item">RN Transition in Progress</div>
+        <div class="cred-item">20+ Years Clinical Experience</div>
+        <div class="cred-item">Case Management Certified</div>
+      </div>
+    </div>
+
+    <div class="meet-body">
+      <div class="section-tag">Your Navigator</div>
+      <h2 class="section-headline">Meet<br/><em>Shelby.</em></h2>
+      <p>
+        After two decades working inside hospitals, clinics, surgery suites, and emergency rooms — Shelby knew what families needed most wasn't another provider. It was someone who could help them understand the ones they already had.
+      </p>
+      <p>
+        She built Willow Care Co. on a simple belief: <strong>clinical knowledge should serve families, not intimidate them.</strong> Her background spans geriatrics, surgical care, pediatrics, family practice, occupational health, and case management — which means she's seen your situation from nearly every angle.
+      </p>
+      <p>
+        She operates entirely within her licensed scope, working alongside your medical team — never around them. Think of her as the trusted family friend who happens to know exactly what your doctor meant.
+      </p>
+      <div class="experience-tags">
+        <span class="exp-tag">Case Management</span>
+        <span class="exp-tag">Geriatrics</span>
+        <span class="exp-tag">Pediatric Care</span>
+        <span class="exp-tag">PACU</span>
+        <span class="exp-tag">Same-Day Surgery</span>
+        <span class="exp-tag">Occupational Health</span>
+        <span class="exp-tag">Family Practice</span>
+        <span class="exp-tag">Colorectal</span>
+        <span class="exp-tag">Emergency Care</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section reveal" id="contact">
+  <div class="cta-inner">
+    <div class="section-tag" style="justify-content:center;">Ready to Start?</div>
+    <h2 class="section-headline">Let's talk about<br/><em>your family.</em></h2>
+    <p>Book a free 20-minute consultation and let us figure out together how Willow Care Co. can help. No commitment, no clinical jargon — just a conversation.</p>
+    <div class="cta-form">
+      <input type="email" placeholder="Your email address"/>
+      <a href="#" class="btn-primary">Let's Talk</a>
+    </div>
+    <p class="cta-note">Or call directly · (850) 000-0000 · Florida-based, serving families statewide</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Willow<span>Care</span> Co.</div>
+  <div class="footer-links">
+    <a href="#services">Services</a>
+    <a href="#how">Process</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="footer-legal">
+    Willow Care Co. provides care navigation, patient advocacy, and health education services. We do not provide clinical diagnosis, medical treatment, or prescriptions. All services are delivered within Florida LPN scope of practice.
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => observer.observe(r));
+</script>
+</body>
+</html>
