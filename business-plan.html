@@ -1,0 +1,1693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Willow Care Co. — Business Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --sage:       #7A8C6E;
+    --sage-light: #B5C4A8;
+    --sage-pale:  #EDF1E9;
+    --warm:       #C4A882;
+    --warm-pale:  #F7F1E8;
+    --ink:        #1C2018;
+    --ink-soft:   #3D4237;
+    --mist:       #F4F5F1;
+    --white:      #FAFAF8;
+    --serif:      'Cormorant Garamond', Georgia, serif;
+    --sans:       'DM Sans', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--white);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.4rem 4rem;
+    background: rgba(250,250,248,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(122,140,110,0.12);
+    animation: fadeDown 0.8s ease both;
+  }
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--sage); }
+  .nav-tag {
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    background: var(--sage-pale);
+    padding: 0.35rem 1rem;
+    border-radius: 2rem;
+    border: 1px solid rgba(122,140,110,0.2);
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--sage); }
+
+  /* ── HERO ── */
+  .plan-hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 5rem;
+    background: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+  .plan-hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 520px; height: 520px;
+    background: radial-gradient(circle, rgba(181,196,168,0.18) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .plan-hero::after {
+    content: '';
+    position: absolute;
+    bottom: 40px; left: -60px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(196,168,130,0.12) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 6rem 4rem;
+    animation: fadeUp 1s 0.2s ease both;
+  }
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 1.6rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 28px; height: 1px;
+    background: var(--sage);
+  }
+  .plan-title {
+    font-family: var(--serif);
+    font-size: clamp(3.2rem, 6vw, 6rem);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 2rem;
+  }
+  .plan-title em { font-style: italic; color: var(--sage); }
+  .plan-subtitle {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--ink-soft);
+    max-width: 560px;
+    line-height: 1.75;
+    margin-bottom: 3rem;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 3rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(122,140,110,0.15);
+  }
+  .meta-item { display: flex; flex-direction: column; gap: 0.2rem; }
+  .meta-label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--sage);
+  }
+  .meta-value {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--ink);
+  }
+
+  /* ── SECTION SHARED ── */
+  .section-tag {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .section-tag::before {
+    content: '';
+    width: 20px; height: 1px;
+    background: var(--sage);
+  }
+  .section-headline {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 3.5vw, 3.2rem);
+    font-weight: 300;
+    line-height: 1.12;
+    color: var(--ink);
+    margin-bottom: 1.4rem;
+  }
+  .section-headline em { font-style: italic; color: var(--sage); }
+
+  /* ── MARQUEE ── */
+  .marquee-strip {
+    background: var(--sage);
+    padding: 0.9rem 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .marquee-inner {
+    display: inline-flex;
+    gap: 3rem;
+    animation: marquee 32s linear infinite;
+  }
+  .marquee-inner span {
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.85);
+  }
+  .marquee-inner .dot {
+    color: rgba(255,255,255,0.4);
+    font-size: 0.5rem;
+    vertical-align: middle;
+  }
+
+  /* ── OVERVIEW STRIP ── */
+  .overview {
+    padding: 5rem 4rem;
+    background: var(--warm-pale);
+  }
+  .overview-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(122,140,110,0.15);
+    border-radius: 1.2rem;
+    overflow: hidden;
+    margin-top: 3rem;
+  }
+  .overview-card {
+    background: var(--white);
+    padding: 2rem;
+    position: relative;
+  }
+  .overview-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 3px;
+    background: transparent;
+    transition: background 0.3s;
+  }
+  .overview-card:hover::before { background: var(--sage); }
+  .overview-num {
+    font-family: var(--serif);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--sage);
+    opacity: 0.6;
+    margin-bottom: 0.8rem;
+  }
+  .overview-title {
+    font-family: var(--serif);
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+    line-height: 1.25;
+  }
+  .overview-desc {
+    font-size: 0.83rem;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+
+  /* ── PHASE SECTIONS ── */
+  .phase-section {
+    padding: 6rem 4rem;
+  }
+  .phase-section:nth-child(odd) { background: var(--white); }
+  .phase-section:nth-child(even) { background: var(--mist); }
+  .phase-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+  .phase-sidebar {
+    position: sticky;
+    top: 8rem;
+  }
+  .phase-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--sage-pale);
+    border: 1px solid rgba(122,140,110,0.25);
+    border-radius: 2rem;
+    padding: 0.4rem 1rem;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 1.4rem;
+  }
+  .phase-number {
+    font-family: var(--serif);
+    font-size: 5rem;
+    font-weight: 300;
+    color: rgba(122,140,110,0.15);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+  .phase-title {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.8rem;
+    line-height: 1.2;
+  }
+  .phase-desc {
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    line-height: 1.7;
+    margin-bottom: 1.4rem;
+  }
+  .phase-timeline {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--warm);
+    letter-spacing: 0.06em;
+  }
+  .phase-timeline::before {
+    content: '◷';
+    font-size: 0.9rem;
+  }
+  .phase-content {}
+
+  /* ── TODO ITEMS ── */
+  .todo-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  .todo-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    background: var(--white);
+    border: 1px solid rgba(122,140,110,0.12);
+    border-radius: 0.9rem;
+    padding: 1.1rem 1.3rem;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .todo-item::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 0;
+    background: var(--sage-pale);
+    transition: width 0.3s;
+    z-index: 0;
+  }
+  .todo-item:hover { border-color: rgba(122,140,110,0.3); transform: translateX(3px); box-shadow: 0 4px 16px rgba(28,32,24,0.06); }
+  .todo-item:hover::before { width: 4px; }
+  .todo-item.done { opacity: 0.55; }
+  .todo-item.done .todo-text { text-decoration: line-through; color: var(--ink-soft); }
+  .todo-checkbox {
+    width: 22px; height: 22px;
+    border: 1.5px solid rgba(122,140,110,0.4);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+    transition: all 0.25s;
+    position: relative;
+    z-index: 1;
+  }
+  .todo-item.done .todo-checkbox {
+    background: var(--sage);
+    border-color: var(--sage);
+  }
+  .todo-item.done .todo-checkbox::after {
+    content: '';
+    display: block;
+    width: 6px; height: 10px;
+    border-right: 2px solid white;
+    border-bottom: 2px solid white;
+    transform: rotate(40deg) translate(-1px, -1px);
+  }
+  .todo-body { flex: 1; position: relative; z-index: 1; }
+  .todo-text {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.5;
+    margin-bottom: 0.3rem;
+  }
+  .todo-sub {
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+  .todo-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .todo-tag {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.7rem;
+    border-radius: 2rem;
+  }
+  .tag-action { background: rgba(122,140,110,0.12); color: var(--sage); }
+  .tag-cost { background: rgba(196,168,130,0.18); color: #8a6f40; }
+  .tag-legal { background: rgba(196,168,130,0.25); color: #7a5f30; }
+  .tag-urgent { background: rgba(180,100,80,0.1); color: #a05040; }
+  .tag-recurring { background: rgba(122,140,110,0.08); color: #5a6e50; }
+  .todo-cost {
+    font-family: var(--serif);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--warm);
+    margin-left: auto;
+    white-space: nowrap;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── COST TABLE ── */
+  .cost-table-wrap {
+    background: var(--white);
+    border: 1px solid rgba(122,140,110,0.15);
+    border-radius: 1.2rem;
+    overflow: hidden;
+    margin-top: 1.5rem;
+  }
+  .cost-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .cost-table th {
+    background: var(--sage-pale);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--sage);
+    padding: 0.8rem 1.4rem;
+    text-align: left;
+  }
+  .cost-table td {
+    padding: 0.9rem 1.4rem;
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    border-bottom: 1px solid rgba(122,140,110,0.08);
+    vertical-align: middle;
+  }
+  .cost-table tr:last-child td { border-bottom: none; }
+  .cost-table td:first-child { color: var(--ink); font-weight: 400; }
+  .cost-table td:last-child { font-family: var(--serif); font-size: 0.95rem; color: var(--warm); text-align: right; font-weight: 600; }
+  .cost-table .total-row td {
+    background: var(--sage-pale);
+    font-weight: 500;
+    border-top: 1px solid rgba(122,140,110,0.2);
+    color: var(--ink);
+  }
+  .cost-table .total-row td:last-child { color: var(--sage); font-size: 1.1rem; }
+
+  /* ── INFO CARDS ── */
+  .info-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  .info-card {
+    background: var(--white);
+    border: 1px solid rgba(122,140,110,0.12);
+    border-radius: 1.1rem;
+    padding: 1.5rem;
+  }
+  .info-card-icon { font-size: 1.4rem; margin-bottom: 0.8rem; }
+  .info-card h4 {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.4rem;
+  }
+  .info-card p {
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    line-height: 1.65;
+  }
+  .info-card a {
+    color: var(--sage);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .info-card.featured {
+    background: var(--sage);
+    border-color: var(--sage);
+    grid-column: 1/-1;
+  }
+  .info-card.featured h4 { color: white; }
+  .info-card.featured p { color: rgba(255,255,255,0.82); }
+
+  /* ── CALLOUT ── */
+  .callout {
+    background: var(--ink);
+    border-radius: 1.2rem;
+    padding: 2rem;
+    margin-top: 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .callout::before {
+    content: '"';
+    position: absolute;
+    top: -0.5rem; left: 1.2rem;
+    font-family: var(--serif);
+    font-size: 8rem;
+    color: rgba(181,196,168,0.1);
+    font-weight: 600;
+    line-height: 1;
+    pointer-events: none;
+  }
+  .callout p {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    font-style: italic;
+    font-weight: 300;
+    color: rgba(255,255,255,0.9);
+    line-height: 1.6;
+    position: relative;
+    z-index: 1;
+  }
+  .callout cite {
+    display: block;
+    margin-top: 0.8rem;
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--sage-light);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── BUDGET HERO ── */
+  .budget-section {
+    padding: 6rem 4rem;
+    background: var(--ink);
+    color: white;
+  }
+  .budget-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .budget-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+  .budget-tag {
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--sage-light);
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  .budget-tag::before, .budget-tag::after {
+    content: '';
+    width: 20px; height: 1px;
+    background: var(--sage-light);
+  }
+  .budget-title {
+    font-family: var(--serif);
+    font-size: clamp(2.2rem, 4vw, 3.8rem);
+    font-weight: 300;
+    line-height: 1.1;
+  }
+  .budget-title em { font-style: italic; color: var(--sage-light); }
+  .budget-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+  .budget-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 1.2rem;
+    padding: 1.8rem;
+    transition: background 0.2s;
+  }
+  .budget-card:hover { background: rgba(255,255,255,0.08); }
+  .budget-card-label {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--sage-light);
+    margin-bottom: 0.8rem;
+  }
+  .budget-card-amount {
+    font-family: var(--serif);
+    font-size: 2.4rem;
+    font-weight: 300;
+    color: white;
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+  .budget-card-range {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.45);
+  }
+  .budget-card.highlight {
+    background: var(--sage);
+    border-color: var(--sage);
+  }
+  .budget-card.highlight .budget-card-label { color: rgba(255,255,255,0.75); }
+  .budget-card.highlight .budget-card-range { color: rgba(255,255,255,0.65); }
+  .budget-breakdown {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 1.2rem;
+    overflow: hidden;
+  }
+  .budget-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.6rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    gap: 1rem;
+  }
+  .budget-row:last-child { border-bottom: none; }
+  .budget-row-label { font-size: 0.88rem; color: rgba(255,255,255,0.75); }
+  .budget-row-note { font-size: 0.75rem; color: rgba(255,255,255,0.35); }
+  .budget-row-amount {
+    font-family: var(--serif);
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--sage-light);
+    white-space: nowrap;
+  }
+  .budget-row.total-row {
+    background: rgba(181,196,168,0.1);
+  }
+  .budget-row.total-row .budget-row-label { color: white; font-weight: 500; }
+  .budget-row.total-row .budget-row-amount { color: var(--sage-light); font-size: 1.3rem; font-weight: 600; }
+
+  /* ── TIMELINE ── */
+  .timeline-section {
+    padding: 6rem 4rem;
+    background: var(--sage-pale);
+  }
+  .timeline-inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .timeline-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+  .timeline-header p { color: var(--ink-soft); margin-top: 0.8rem; font-size: 1rem; }
+  .timeline {
+    position: relative;
+    padding-left: 3rem;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 8px; bottom: 8px;
+    width: 1px;
+    background: repeating-linear-gradient(180deg, var(--sage) 0, var(--sage) 6px, transparent 6px, transparent 14px);
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 2.5rem;
+    animation: fadeUp 0.6s ease both;
+  }
+  .timeline-dot {
+    position: absolute;
+    left: -3.5rem;
+    top: 6px;
+    width: 16px; height: 16px;
+    background: var(--white);
+    border: 2px solid var(--sage);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .timeline-dot::after {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--sage);
+    border-radius: 50%;
+  }
+  .timeline-period {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 0.3rem;
+  }
+  .timeline-event {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.3rem;
+  }
+  .timeline-body {
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    line-height: 1.65;
+  }
+  .timeline-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.6rem;
+  }
+  .tl-tag {
+    font-size: 0.68rem;
+    padding: 0.15rem 0.65rem;
+    border-radius: 2rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+  .tl-legal { background: rgba(196,168,130,0.2); color: #8a6f40; }
+  .tl-insurance { background: rgba(180,100,80,0.1); color: #a05040; }
+  .tl-cert { background: rgba(122,140,110,0.15); color: var(--sage); }
+  .tl-marketing { background: rgba(80,80,180,0.08); color: #5050a0; }
+  .tl-ops { background: rgba(60,60,60,0.08); color: #555; }
+
+  /* ── CTA FOOTER ── */
+  .cta-section {
+    padding: 7rem 4rem;
+    background: var(--white);
+    text-align: center;
+  }
+  .cta-inner { max-width: 600px; margin: 0 auto; }
+  .cta-inner p {
+    font-size: 1rem;
+    color: var(--ink-soft);
+    line-height: 1.75;
+    margin-bottom: 2.5rem;
+    margin-top: 1rem;
+  }
+  .btn-primary {
+    background: var(--sage);
+    color: var(--white);
+    padding: 0.9rem 2.2rem;
+    border-radius: 2rem;
+    font-size: 0.88rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.25s, transform 0.2s;
+  }
+  .btn-primary:hover { background: var(--ink); transform: translateY(-2px); }
+  .progress-summary {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(122,140,110,0.15);
+  }
+  .progress-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 0.8rem;
+  }
+  .progress-bar-wrap {
+    background: var(--sage-pale);
+    border-radius: 2rem;
+    height: 8px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+  }
+  .progress-bar {
+    height: 100%;
+    background: var(--sage);
+    border-radius: 2rem;
+    width: 0%;
+    transition: width 1s ease;
+  }
+  .progress-note {
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+  }
+  #progress-count { font-weight: 500; color: var(--ink); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    color: rgba(255,255,255,0.5);
+    padding: 2.5rem 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .footer-logo {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--white);
+  }
+  .footer-logo span { color: var(--sage-light); }
+  .footer-legal {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.3);
+    max-width: 420px;
+    text-align: right;
+    line-height: 1.6;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 1.8rem; }
+    .hero-inner, .phase-section, .overview, .budget-section, .timeline-section, .cta-section { padding-left: 1.8rem; padding-right: 1.8rem; }
+    .phase-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .phase-sidebar { position: static; }
+    .overview-grid { grid-template-columns: 1fr 1fr; }
+    .budget-grid { grid-template-columns: 1fr; }
+    .info-cards { grid-template-columns: 1fr; }
+    footer { flex-direction: column; text-align: center; }
+    .footer-legal { text-align: center; max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Willow<span>Care</span> Co.</a>
+  <ul class="nav-links">
+    <li><a href="#phases">The Plan</a></li>
+    <li><a href="#budget">Budget</a></li>
+    <li><a href="#timeline">Timeline</a></li>
+  </ul>
+  <span class="nav-tag">Business Plan 2025</span>
+</nav>
+
+<!-- HERO -->
+<section class="plan-hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Confidential Business Plan</div>
+    <h1 class="plan-title">
+      The roadmap to<br/>
+      <em>launching Willow.</em>
+    </h1>
+    <p class="plan-subtitle">
+      Everything needed to go from idea to operating business — legal formation, insurance, certification, marketing, and your first clients. Clear steps, real costs, a realistic timeline.
+    </p>
+    <div class="hero-meta">
+      <div class="meta-item">
+        <span class="meta-label">Prepared for</span>
+        <span class="meta-value">Shelby</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Target launch</span>
+        <span class="meta-value">Q3 2025</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Lean budget</span>
+        <span class="meta-value">~$5,000</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Phases</span>
+        <span class="meta-value">6</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-inner">
+    <span>LLC Formation</span><span class="dot">●</span>
+    <span>Professional Liability Insurance</span><span class="dot">●</span>
+    <span>BCPA Certification</span><span class="dot">●</span>
+    <span>HIPAA Compliance</span><span class="dot">●</span>
+    <span>Website Launch</span><span class="dot">●</span>
+    <span>APHA Membership</span><span class="dot">●</span>
+    <span>First Client</span><span class="dot">●</span>
+    <span>Florida Licensed</span><span class="dot">●</span>
+    <!-- duplicate -->
+    <span>LLC Formation</span><span class="dot">●</span>
+    <span>Professional Liability Insurance</span><span class="dot">●</span>
+    <span>BCPA Certification</span><span class="dot">●</span>
+    <span>HIPAA Compliance</span><span class="dot">●</span>
+    <span>Website Launch</span><span class="dot">●</span>
+    <span>APHA Membership</span><span class="dot">●</span>
+    <span>First Client</span><span class="dot">●</span>
+    <span>Florida Licensed</span><span class="dot">●</span>
+  </div>
+</div>
+
+<!-- OVERVIEW -->
+<section class="overview reveal">
+  <div class="overview-inner">
+    <div class="section-tag">The Six Phases</div>
+    <h2 class="section-headline">Everything that needs to happen,<br/><em>in the right order.</em></h2>
+    <div class="overview-grid">
+      <div class="overview-card">
+        <div class="overview-num">01</div>
+        <div class="overview-title">Legal Entity</div>
+        <div class="overview-desc">Florida Single-Member LLC filed on Sunbiz. EIN from IRS. Operating agreement drafted. Business bank account opened.</div>
+      </div>
+      <div class="overview-card">
+        <div class="overview-num">02</div>
+        <div class="overview-title">Insurance</div>
+        <div class="overview-desc">Professional liability + E&O, general liability, and cyber coverage. Must be in place before any client contact.</div>
+      </div>
+      <div class="overview-card">
+        <div class="overview-num">03</div>
+        <div class="overview-title">Certification</div>
+        <div class="overview-desc">Board Certified Patient Advocate (BCPA) exam via PACB. The gold-standard credential for independent advocacy.</div>
+      </div>
+      <div class="overview-card">
+        <div class="overview-num">04</div>
+        <div class="overview-title">Memberships</div>
+        <div class="overview-desc">APHA membership + AdvoConnection directory listing. The #1 source of early client referrals in the industry.</div>
+      </div>
+      <div class="overview-card">
+        <div class="overview-num">05</div>
+        <div class="overview-title">Marketing</div>
+        <div class="overview-desc">Website, professional headshot, brochures, Google Business Profile, and HIPAA-compliant intake tools.</div>
+      </div>
+      <div class="overview-card">
+        <div class="overview-num">06</div>
+        <div class="overview-title">Finance & Tax</div>
+        <div class="overview-desc">Bookkeeping setup, quarterly estimated taxes, and a CPA relationship. The infrastructure to get paid cleanly.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHASE 1: LEGAL -->
+<section class="phase-section reveal" id="phases">
+  <div class="phase-inner">
+    <div class="phase-sidebar">
+      <div class="phase-badge">Phase 1</div>
+      <div class="phase-number">01</div>
+      <h3 class="phase-title">Legal Entity Formation</h3>
+      <p class="phase-desc">The foundation everything else builds on. Do this first — before purchasing insurance, before talking to clients, before spending money on marketing.</p>
+      <div class="phase-timeline">Weeks 1–2</div>
+    </div>
+    <div class="phase-content">
+      <div class="todo-list">
+        <div class="todo-item" onclick="toggleTodo(this)">
+          <div class="todo-checkbox"></div>
+          <div class="todo-body">
+            <div class="todo-text">Search name availability on Sunbiz.org</div>
+            <div class="todo-sub">Go to dos.fl.gov/sunbiz → Search → confirm "Willow Care Co. LLC" is available</div>
+            <div class="todo-meta">
+              <span class="todo-tag tag-action">Do first</span>
+              <span class="todo-tag tag-cost">Free</span>
+            </div>
+          </div>
+        </div>
+        <div class="todo-item" onclick="toggleTodo(this)">
+          <div class="todo-checkbox"></div>
+          <div class="todo-body">
+            <div class="todo-text">File Articles of Organization on Sunbiz.org</div>
+            <div class="todo-sub">Online filing at dos.fl.gov/sunbiz. Include registered agent info. Processing takes 2–3 days online.</div>
+            <div class="todo-meta">
+              <span class="todo-tag tag-legal">Legal</span>
+              <span class="todo-tag tag-cost">$125 filing fee</span>
+            </div>
+          </div>
+          <div class="todo-cost">$125</div>
+        </div>
+        <div class="todo-item" onclick="toggleTodo(this)">
+          <div class="todo-checkbox"></div>
+          <div class="todo-body">
+            <div class="todo-text">Sign up for a registered agent service</div>
+            <div class="todo-sub">Keeps your home address off the public record. Northwest Registered Agent or Registered Agents Inc. are reputable options.</div>
+            <div class="todo-meta">
+              <span class="todo-tag tag-recurring">Annual</span>
+              <span class="todo-tag tag-cost">~$50–$100/yr</span>
+            </div>
+          </div>
+          <div class="todo-cost">~$75/yr</div>
+        </div>
+        <div class="todo-item" onclick="toggleTodo(this)">
+          <div class="todo-checkbox"></div>
+          <div class="todo-body">
+            <div class="todo-text">Get an EIN (Employer Identification Number) from IRS.gov</div>
+            <div class="todo-sub">Free, takes 5–10 minutes at irs.gov/businesses/small-businesses-self-employed/apply-for-an-employer-identification-number-ein-online. Needed to open a business bank account.</div>
+            <div class="todo-meta">
+              <span class="todo-tag tag-action">Do same day</span>
+              <span class="todo-tag tag-cost">Free</span>
+            </div>
+          </div>
+          <div class="todo-cost">Free</div>
+        </div>
+        <div class="todo-item" onclick="toggleTodo(this)">
+          <div class="todo-checkbox"></div>
+          <div class="todo-body">
+            <div class="todo-text">Draft and sign an Operating Agreement</div>
+            <div class="todo-sub">Not legally required in Florida but critical for proving your LLC is a real separate entity. Use LegalZoom ($99) or hire a local attorney ($300–$500).</div>
+            <div class="todo-meta">
+              <span class="todo-tag tag-legal">Legal</span>
+              <span class="todo-tag tag-cost">$99–$500</span>
+            </div>
+          </div>
+          <div class="todo-cost">~$150</div>
+        </div>
+        <div class="todo-item" onclick="toggleTodo(this)">
+          <div class="todo-checkbox"></div>
+          <div class="todo-body">
+            <div class="todo-text">Open a dedicated business bank account</div>
+            <div class="todo-sub">Never co-mingle personal and business funds — this is the fastest way to lose liability protection. Bring your EIN + Articles of Organization. Chase Business, Wells Fargo, or a local credit union all work.</div>
+            <div class="todo-meta">
+              <span class="todo-tag tag-urgent">Critical</span>
+              <span class="todo-tag tag-cost">Free–$15/mo</span>
+            </div>
+          </div>
+        </div>
+        <div class="todo-item" onclick="toggleTodo(this)">
+          <div class="todo-checkbox"></div>
+          <div class="todo-body">
+            <div class="todo-text">Set a May 1 calendar reminder for Annual Report</div>
+            <div class="todo-sub">Florida LLCs file annually at Sunbiz. Missing the deadline triggers a $400 late fee on top of the $138.75 filing fee. Set it now so it never surprises you.</div>
+            <div class="todo-meta">
+              <span class="todo-tag tag-recurring">Annual · May 1</span>
+              <span class="todo-tag tag-cost">$138.75/yr</span>
+            </div>
+          </div>
+          <div class="todo-cost">$138.75/yr</div>
+        </div>
+      </div>
+      <div class="cost-table-wrap" style="margin-top: 1.5rem;">
+        <table class="cost-table">
+          <thead><tr><th>Item</th><th>When</th><th>Cost</th></tr></thead>
+          <tbody>
+            <tr><td>Articles of Organization</td><td>Once</td><td>$125</td></tr>
+            <tr><td>Registered Agent</td><td>Annual</td><td>$50–$100</td></tr>
+            <tr><td>EIN</td><td>Once</td><td>Free</td></tr>
+            <tr><td>Operating Agreement</td><td>Once</td><td>$99–$500</td></tr>
+            <tr><td>Annual Report (Year 2+)</td><td>Annual · May 1</td><td>$138.75</td></tr>
+            <tr class="total-row"><td><strong>Phase 1 Total</strong></td><td></td><td>$274–$725</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHASE 2: INSURANCE -->
+<section class="phase-section reveal">
+  <div class="phase-inner">
+    <div class="phase-sidebar">
+      <div class="phase-badge">Phase 2</div>
+      <div class="phase-number">02</div>
+      <h3 class="phase-title">Professional Liability Insurance</h3>
+      <p class="phase-desc">Non-negotiable. Purchase this before the first client conversation. Families are relying on your guidance — you need to be protected.</p>
+      <div class="phase-timeline">Week 2–3</div>
+    </div>
+    <div class="phase-content">
+      <div class="callout">
+        <p>Any smart business person knows to protect themselves. All practicing advocates need liability insurance — professional liability, E&O, and a business owners policy.</p>
+        <cite>— Alliance of Professional Health Advocates</cite>
+      </div>
+      <div class="info-cards">
+        <div class="info-card featured">
+          <div class="info-card-icon">🛡️</div>
+          <h4>Primary carrier: CPH & Associates</h4>
+          <p>The most commonly recommended carrier in the patient advocacy community. Policies are issued within minutes online. Covers claims, regulatory board grievances, unlimited legal defense, personal injury, Good Samaritan liability. Occurrence-based (not claims-made) — meaning you're covered for incidents even after the policy expires. Get a quote at <a href="https://cphins.com/patient-advocate" style="color:rgba(255,255,255,0.85);text-decoration:underline;">cphins.com/patient-advocate</a></p>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon">⚖️</div>
+          <h4>Professional Liability / E&O</h4>
+          <p>Covers claims arising from your advisory services. $1M per claim / $3M aggregate is standard. This is your core policy.</p>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon">🏢</div>
+          <h4>General Liability</h4>
+          <p>Covers bodily injury or property damage — for example, a client trips during an in-person meeting. Add as a rider to CPH.</p>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon">🔐</div>
+          <h4>Cyber Liability</h4>
+          <p>Critical because you handle PHI (protected health information). Covers data breaches and HIPAA-related privacy incidents. Add to your CPH policy.</p>
+        </div>
+      </div>
+      <div class="todo-list" style="margin-top: 1.5rem;">
+        <div class="todo-item" onclick="toggleTodo(this)">
+          <div class="todo-checkbox"></div>
+          <div class="todo-body">
+            <div class="todo-text">Get a quote from CPH & Associates at cphins.com/patient-advocate</div>
+            <div class="todo-sub">Online application takes ~10 minutes. Policy issued within minutes of approval. Target $1M/$3M limits.</div>
+            <div class="todo-meta"><span class="todo-tag tag-urgent">Do before any client contact</span></div>
+          </div>
+          <div class="todo-cost">~$200–$500/yr</div>
+        </div>
+        <div class="todo-item" onclick="toggleTodo(this)">
+          <div class="todo-checkbox"></div>
+          <div class="todo-body">
+            <div class="todo-text">Add General Liability rider to your CPH policy</div>
+            <div class="todo-sub">Especially important if you ever meet clients in person — in their home, a hospital, or a coffee shop.</div>
+            <div class="todo-meta"><span class="todo-tag tag-action">Add-on</span></div>
+          </div>
+          <div class="todo-cost">~$150–$300/yr</div>
+        </div>
+        <div class="todo-item" onclick="toggleTodo(this)">
+          <div class="todo-checkbox"></div>
+          <div class="todo-body">
+            <div class="todo-text">Add Cyber Liability rider</div>
+            <div class="todo-sub">You will handle health records and PHI. This is not optional — HIPAA exposure is real in an advisory practice.</div>
+            <div class="todo-meta"><span class="todo-tag tag-urgent">Critical</span></div>
+          </div>
+          <div class="todo-cost">~$100–$250/yr</div>
+        </div>
+        <div class="todo-item" onclick="toggleTodo(this)">
+          <div class="todo-checkbox"></div>
+          <div class="todo-body">
+            <div class="todo-text">Compare with CM&F Group as a backup quote</div>
+            <div class="todo-sub">cmfgroup.com — particularly strong for nurse advocates. Covers up to $4M aggregate, includes telemedicine and assault coverage.</div>
+            <div class="todo-meta"><span class="todo-tag tag-action">Optional comparison</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHASE 3: CERTIFICATION -->
+<section class="phase-section reveal">
+  <div class="phase-inner">
+    <div class="phase-sidebar">
+      <div class="phase-badge">Phase 3</div>
+      <div class="phase-number">03</div>
+      <h3 class="phase-title">BCPA Certification</h3>
+      <p class="phase-desc">Board Certified Patient Advocate — the gold-standard credential for independent advocacy. Validates the expertise clients are already trusting you with.</p>
+      <div class="phase-timeline">Months 2–4</div>
+    </div>
+    <div class="phase-content">
+      <div class="todo-list">
+        <div class="todo-item" onclick="toggleTodo(this)">
+          <div class="todo-checkbox"></div>
+          <div class="todo-body">
+            <div class="todo-text">Visit pacboard.org and read the full Candidate Handbook</div>
+            <div class="todo-sub">The handbook covers all eligibility requirements, the 5 exam domains, timeline, and policies. Reading it is required as part of the application.</div>
+            <div class="todo-meta"><span class="todo-tag tag-action">Start here</span><span class="todo-tag tag-cost">Free</span></div>
+          </div>
+        </div>
+        <div class="todo-item" onclick="toggleTodo(this)">
+          <div class="todo-checkbox"></div>
+          <div class="todo-body">
+            <div class="todo-text">Determine your eligibility pathway</div>
+            <div class="todo-sub">Option A: Bachelor's degree or higher. Option B: Equivalent experience (paid or volunteer) documented with a 250–500 word narrative citing PACB's Knowledge, Skills & Abilities. Your 20+ years of nursing qualifies strongly for the experience pathway.</div>
+            <div class="todo-meta"><span class="todo-tag tag-action">Confirm pathway</span></div>
+          </div>
+        </div>
+        <div class="todo-item" onclick="toggleTodo(this)">
+          <div class="todo-checkbox"></div>
+          <div class="todo-body">
+            <div class="todo-text">Secure two letters of recommendation</div>
+            <div class="todo-sub">Must come from people who have directly observed your advocacy work — former colleagues, physicians you've worked alongside, or supervisors. Character references that validate your patient advocacy skills.</div>
+            <div class="todo-meta"><span class="todo-tag tag-action">Reach out early</span></div>
+          </div>
+        </div>
+        <div class="todo-item" onclick="toggleTodo(this)">
+          <div class="todo-checkbox"></div>
+          <div class="todo-body">
+            <div class="todo-text">Consider applying for the PACB scholarship</div>
+            <div class="todo-sub">Covers the $425 exam fee entirely for first-time candidates. Application deadlines: May 31 for Fall cycle, Oct 31 for Spring cycle. pacboard.org/bcpa-scholarship</div>
+            <div class="todo-meta"><span class="todo-tag tag-cost">Could save $425</span></div>
+          </div>
+          <div class="todo-cost">Save $425</div>
+        </div>
+        <div class="todo-item" onclick="toggleTodo(this)">
+          <div class="todo-checkbox"></div>
+          <div class="todo-body">
+            <div class="todo-text">Register at app.prolydian.com and submit application</div>
+            <div class="todo-sub">Create a Prolydian account, upload recommendation letters, pay the $425 fee (or apply scholarship). Approval notification within 5 business days.</div>
+            <div class="todo-meta"><span class="todo-tag tag-legal">Application</span><span class="todo-tag tag-cost">$425</span></div>
+          </div>
+          <div class="todo-cost">$425</div>
+        </div>
+        <div class="todo-item" onclick="toggleTodo(this)">
+          <div class="todo-checkbox"></div>
+          <div class="todo-body">
+            <div class="todo-text">Purchase study/prep materials</div>
+            <div class="todo-sub">PACB doesn't endorse a specific course, but APHA and HealthAdvocateX both offer prep resources. Budget $200–$500. The exam covers 5 domains: communication, medical knowledge, navigation, insurance/legal, and ethics.</div>
+            <div class="todo-meta"><span class="todo-tag tag-action">Prep for 6–8 weeks</span><span class="todo-tag tag-cost">$200–$500</span></div>
+          </div>
+          <div class="todo-cost">~$350</div>
+        </div>
+        <div class="todo-item" onclick="toggleTodo(this)">
+          <div class="todo-checkbox"></div>
+          <div class="todo-body">
+            <div class="todo-text">Schedule and sit the exam (spring or fall cycle)</div>
+            <div class="todo-sub">150 multiple-choice questions, 3 hours. Administered online via Proctor360. Results within 2 weeks of the exam cycle closing. You have 3 attempts within a 3-year period.</div>
+            <div class="todo-meta"><span class="todo-tag tag-action">Spring: March · Fall: September</span></div>
+          </div>
+        </div>
+        <div class="todo-item" onclick="toggleTodo(this)">
+          <div class="todo-checkbox"></div>
+          <div class="todo-body">
+            <div class="todo-text">Add "BCPA" credential to all materials once certified</div>
+            <div class="todo-sub">Update website, business cards, email signature, APHA directory listing, and LinkedIn. The credential signals formal validation to prospective clients.</div>
+            <div class="todo-meta"><span class="todo-tag tag-action">After passing</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHASE 4: MEMBERSHIPS -->
+<section class="phase-section reveal">
+  <div class="phase-inner">
+    <div class="phase-sidebar">
+      <div class="phase-badge">Phase 4</div>
+      <div class="phase-number">04</div>
+      <h3 class="phase-title">Professional Memberships & Directories</h3>
+      <p class="phase-desc">Your first clients will come from referrals and directories — not Google ads. Join the right organizations before you launch.</p>
+      <div class="phase-timeline">Month 2</div>
+    </div>
+    <div class="phase-content">
+      <div class="info-cards">
+        <div class="info-card featured">
+          <div class="info-card-icon">🌐</div>
+          <h4>APHA: Alliance of Professional Health Advocates</h4>
+          <p>The premier professional membership org for independent patient advocates. Over 50% of members' initial client contacts come from the AdvoConnection Directory. PACE membership ~$150/yr; Premium ~$400/yr. Includes legal resources, marketing support, mentors, and a members-only forum. Start here: <a href="https://aphadvocates.org">aphadvocates.org</a></p>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon">📋</div>
+          <h4>NAHAC Directory</h4>
+          <p>National Association of Healthcare Advocacy. A second searchable directory. ~$150–$250/yr for a listing. Good for visibility with clients searching nationally.</p>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon">💼</div>
+          <h4>LinkedIn Profile</h4>
+          <p>Update with BCPA credential, Willow Care Co. as your current company, and a clear description of services. This is where hospital discharge planners and elder law attorneys will vet you.</p>
+        </div>
+      </div>
+      <div class="todo-list" style="margin-top: 1.5rem;">
+        <div class="todo-item" onclick="toggleTodo(this)">
+          <div class="todo-checkbox"></div>
+          <div class="todo-body">
+            <div class="todo-text">Join APHA at aphadvocates.org — start with PACE membership</div>
+            <div class="todo-sub">Upgrade to Premium once you're ready to list in AdvoConnection. The directory is the real value — clients find you there from their first Google search.</div>
+            <div class="todo-meta"><span class="todo-tag tag-recurring">Annual</span><span class="todo-tag tag-cost">~$150–$400/yr</span></div>
+          </div>
+          <div class="todo-cost">~$300/yr</div>
+        </div>
+        <div class="todo-item" onclick="toggleTodo(this)">
+          <div class="todo-checkbox"></div>
+          <div class="todo-body">
+            <div class="todo-text">Create a complete AdvoConnection directory profile</div>
+            <div class="todo-sub">Photo, credentials, service description, geographic area, specialties. A complete profile dramatically outperforms a sparse one.</div>
+            <div class="todo-meta"><span class="todo-tag tag-action">Included with Premium</span></div>
+          </div>
+        </div>
+        <div class="todo-item" onclick="toggleTodo(this)">
+          <div class="todo-checkbox"></div>
+          <div class="todo-body">
+            <div class="todo-text">Update LinkedIn — add BCPA, Willow Care Co., clear services description</div>
+            <div class="todo-sub">Hospital social workers, elder law attorneys, and geriatric care managers will look you up on LinkedIn before referring a client.</div>
+            <div class="todo-meta"><span class="todo-tag tag-action">Free</span></div>
+          </div>
+        </div>
+        <div class="todo-item" onclick="toggleTodo(this)">
+          <div class="todo-checkbox"></div>
+          <div class="todo-body">
+            <div class="todo-text">Identify 10 referral relationship targets in your area</div>
+            <div class="todo-sub">Hospital discharge planners, elder law attorneys, geriatric care managers, estate planning attorneys, primary care physicians. These are your best referral sources. Schedule one coffee meeting per week.</div>
+            <div class="todo-meta"><span class="todo-tag tag-action">Ongoing</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHASE 5: MARKETING -->
+<section class="phase-section reveal">
+  <div class="phase-inner">
+    <div class="phase-sidebar">
+      <div class="phase-badge">Phase 5</div>
+      <div class="phase-number">05</div>
+      <h3 class="phase-title">Marketing Infrastructure</h3>
+      <p class="phase-desc">Credibility before visibility. The website and materials are how families judge you before they ever call.</p>
+      <div class="phase-timeline">Weeks 3–8</div>
+    </div>
+    <div class="phase-content">
+      <div class="todo-list">
+        <div class="todo-item" onclick="toggleTodo(this)">
+          <div class="todo-checkbox"></div>
+          <div class="todo-body">
+            <div class="todo-text">Book a professional headshot photographer</div>
+            <div class="todo-sub">This is the single most important marketing spend. Do not use a phone photo. Warm, approachable, professional. Look for a local headshot photographer — not a full studio shoot.</div>
+            <div class="todo-meta"><span class="todo-tag tag-urgent">Don't skip this</span><span class="todo-tag tag-cost">$200–$400</span></div>
+          </div>
+          <div class="todo-cost">~$300</div>
+        </div>
+        <div class="todo-item" onclick="toggleTodo(this)">
+          <div class="todo-checkbox"></div>
+          <div class="todo-body">
+            <div class="todo-text">Build the website on Squarespace or hire a designer</div>
+            <div class="todo-sub">A beautiful, credible website already exists as willow-care-website.html — use that as the design spec. Key pages: Home, Services (with pricing or ranges), About Shelby, and Contact. Squarespace self-build: ~$200. Professional designer: $1,500–$3,500.</div>
+            <div class="todo-meta"><span class="todo-tag tag-action">Core asset</span><span class="todo-tag tag-cost">$200–$3,500</span></div>
+          </div>
+          <div class="todo-cost">~$1,500</div>
+        </div>
+        <div class="todo-item" onclick="toggleTodo(this)">
+          <div class="todo-checkbox"></div>
+          <div class="todo-body">
+            <div class="todo-text">Register willowcareco.com (or similar domain)</div>
+            <div class="todo-sub">Check availability at namecheap.com or Google Domains. Register .com first — .co and .health are acceptable backups. ~$15/year.</div>
+            <div class="todo-meta"><span class="todo-tag tag-action">Do early — names get taken</span><span class="todo-tag tag-cost">~$15/yr</span></div>
+          </div>
+          <div class="todo-cost">$15/yr</div>
+        </div>
+        <div class="todo-item" onclick="toggleTodo(this)">
+          <div class="todo-checkbox"></div>
+          <div class="todo-body">
+            <div class="todo-text">Set up HIPAA-compliant tools for intake and communication</div>
+            <div class="todo-sub">Regular Gmail and Google Forms are NOT HIPAA-compliant. Use Hushmail (encrypted email, ~$20/mo), Jane App or SimplePractice (intake + scheduling, ~$35–$70/mo), and get a BAA (Business Associate Agreement) from each vendor.</div>
+            <div class="todo-meta"><span class="todo-tag tag-urgent">Required before first client</span><span class="todo-tag tag-cost">~$55–$90/mo</span></div>
+          </div>
+          <div class="todo-cost">~$70/mo</div>
+        </div>
+        <div class="todo-item" onclick="toggleTodo(this)">
+          <div class="todo-checkbox"></div>
+          <div class="todo-body">
+            <div class="todo-text">Set up Google Business Profile (free)</div>
+            <div class="todo-sub">Critical for local SEO. Families searching "patient advocate near me" in Florida will find you here. Verify your business address (can use a PO Box or virtual address).</div>
+            <div class="todo-meta"><span class="todo-tag tag-action">Free — high impact</span></div>
+          </div>
+          <div class="todo-cost">Free</div>
+        </div>
+        <div class="todo-item" onclick="toggleTodo(this)">
+          <div class="todo-checkbox"></div>
+          <div class="todo-body">
+            <div class="todo-text">Print business cards and brochures</div>
+            <div class="todo-sub">500 business cards + 100 trifold brochures. Design in Canva ($15/mo). Print at Vistaprint or a local printer. Leave brochures at hospital social worker offices, senior centers, and elder law attorney waiting rooms.</div>
+            <div class="todo-meta"><span class="todo-tag tag-action">Print run</span><span class="todo-tag tag-cost">$150–$300</span></div>
+          </div>
+          <div class="todo-cost">~$200</div>
+        </div>
+        <div class="todo-item" onclick="toggleTodo(this)">
+          <div class="todo-checkbox"></div>
+          <div class="todo-body">
+            <div class="todo-text">Draft client contract / service agreement template</div>
+            <div class="todo-sub">Every engagement needs a signed contract covering scope of services, fees, cancellation terms, confidentiality, and scope-of-practice limitations. Have an attorney review it once (~$300–$500). APHA Premium members get access to legal templates.</div>
+            <div class="todo-meta"><span class="todo-tag tag-legal">Legal</span><span class="todo-tag tag-cost">$300–$500 attorney review</span></div>
+          </div>
+          <div class="todo-cost">~$400</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHASE 6: FINANCE -->
+<section class="phase-section reveal">
+  <div class="phase-inner">
+    <div class="phase-sidebar">
+      <div class="phase-badge">Phase 6</div>
+      <div class="phase-number">06</div>
+      <h3 class="phase-title">Financial Infrastructure</h3>
+      <p class="phase-desc">Getting paid cleanly, staying compliant with the IRS, and never getting surprised by a tax bill. Build this early.</p>
+      <div class="phase-timeline">Month 1 onward</div>
+    </div>
+    <div class="phase-content">
+      <div class="todo-list">
+        <div class="todo-item" onclick="toggleTodo(this)">
+          <div class="todo-checkbox"></div>
+          <div class="todo-body">
+            <div class="todo-text">Set up bookkeeping software immediately</div>
+            <div class="todo-sub">Wave Accounting is free and works well for a solo practice. QuickBooks Self-Employed is $15/mo and integrates with tax software. Start tracking from day one — do not try to reconstruct expenses later.</div>
+            <div class="todo-meta"><span class="todo-tag tag-action">Start now</span><span class="todo-tag tag-cost">Free–$15/mo</span></div>
+          </div>
+          <div class="todo-cost">Free</div>
+        </div>
+        <div class="todo-item" onclick="toggleTodo(this)">
+          <div class="todo-checkbox"></div>
+          <div class="todo-body">
+            <div class="todo-text">Find a CPA familiar with solo healthcare practices</div>
+            <div class="todo-sub">Ask your APHA network for referrals. The first year consultation is the most important — they'll help you set up correctly, determine your quarterly payment amounts, and identify healthcare-specific deductions.</div>
+            <div class="todo-meta"><span class="todo-tag tag-action">Year 1 setup</span><span class="todo-tag tag-cost">$500–$1,500/yr</span></div>
+          </div>
+          <div class="todo-cost">~$800/yr</div>
+        </div>
+        <div class="todo-item" onclick="toggleTodo(this)">
+          <div class="todo-checkbox"></div>
+          <div class="todo-body">
+            <div class="todo-text">Set up quarterly estimated tax payments</div>
+            <div class="todo-sub">As an LLC owner, you pay self-employment tax (15.3% on net earnings) plus income tax. Quarterly deadlines: April 15, June 15, Sept 15, Jan 15. Set aside ~30% of every payment received into a separate savings account.</div>
+            <div class="todo-meta"><span class="todo-tag tag-urgent">Avoid surprises</span><span class="todo-tag tag-recurring">Quarterly</span></div>
+          </div>
+        </div>
+        <div class="todo-item" onclick="toggleTodo(this)">
+          <div class="todo-checkbox"></div>
+          <div class="todo-body">
+            <div class="todo-text">Set up a payment system for client invoicing</div>
+            <div class="todo-sub">Square, Stripe, or Wave Payments all work. Include an invoice template with your LLC name, EIN, and clear payment terms (Net 7 or Net 14). Decide your pricing model: hourly ($100–$175/hr) vs. package-based.</div>
+            <div class="todo-meta"><span class="todo-tag tag-action">Before first client</span></div>
+          </div>
+        </div>
+        <div class="todo-item" onclick="toggleTodo(this)">
+          <div class="todo-checkbox"></div>
+          <div class="todo-body">
+            <div class="todo-text">Document your startup expenses as tax deductions</div>
+            <div class="todo-sub">LLC filing fees, insurance, certification costs, website, materials, home office, mileage — all deductible as business expenses. Keep every receipt. IRS allows deducting up to $5,000 in startup costs in Year 1.</div>
+            <div class="todo-meta"><span class="todo-tag tag-action">Save receipts now</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUDGET SECTION -->
+<section class="budget-section reveal" id="budget">
+  <div class="budget-inner">
+    <div class="budget-header">
+      <div class="budget-tag">Total Investment</div>
+      <h2 class="budget-title">What this actually<br/><em>costs to launch.</em></h2>
+    </div>
+    <div class="budget-grid">
+      <div class="budget-card highlight">
+        <div class="budget-card-label">Lean launch (DIY)</div>
+        <div class="budget-card-amount">~$5,000</div>
+        <div class="budget-card-range">Self-built website, handle bookkeeping yourself</div>
+      </div>
+      <div class="budget-card">
+        <div class="budget-card-label">Professional launch</div>
+        <div class="budget-card-amount">~$9,000</div>
+        <div class="budget-card-range">Designer-built site, CPA from Day 1</div>
+      </div>
+      <div class="budget-card">
+        <div class="budget-card-label">Ongoing annual (Y2+)</div>
+        <div class="budget-card-amount">~$4,000</div>
+        <div class="budget-card-range">Insurance, memberships, software, taxes</div>
+      </div>
+    </div>
+    <div class="budget-breakdown">
+      <div class="budget-row">
+        <div>
+          <div class="budget-row-label">Phase 1 — Legal Entity Formation</div>
+          <div class="budget-row-note">LLC filing, registered agent, operating agreement, EIN</div>
+        </div>
+        <div class="budget-row-amount">$274–$725</div>
+      </div>
+      <div class="budget-row">
+        <div>
+          <div class="budget-row-label">Phase 2 — Professional Liability Insurance</div>
+          <div class="budget-row-note">E&O, general liability, cyber coverage (Year 1)</div>
+        </div>
+        <div class="budget-row-amount">$450–$1,050</div>
+      </div>
+      <div class="budget-row">
+        <div>
+          <div class="budget-row-label">Phase 3 — BCPA Certification</div>
+          <div class="budget-row-note">Exam fee + prep materials (scholarship may reduce to $0)</div>
+        </div>
+        <div class="budget-row-amount">$655–$1,000</div>
+      </div>
+      <div class="budget-row">
+        <div>
+          <div class="budget-row-label">Phase 4 — Professional Memberships</div>
+          <div class="budget-row-note">APHA + AdvoConnection directory (Year 1)</div>
+        </div>
+        <div class="budget-row-amount">$300–$650</div>
+      </div>
+      <div class="budget-row">
+        <div>
+          <div class="budget-row-label">Phase 5 — Marketing Infrastructure</div>
+          <div class="budget-row-note">Website, headshot, materials, HIPAA tools, domain, contract</div>
+        </div>
+        <div class="budget-row-amount">$2,385–$5,505</div>
+      </div>
+      <div class="budget-row">
+        <div>
+          <div class="budget-row-label">Phase 6 — Finance & Tax (Year 1)</div>
+          <div class="budget-row-note">CPA setup, bookkeeping software</div>
+        </div>
+        <div class="budget-row-amount">$500–$1,500</div>
+      </div>
+      <div class="budget-row total-row">
+        <div>
+          <div class="budget-row-label">Total Year 1 Investment</div>
+          <div class="budget-row-note">Before any revenue</div>
+        </div>
+        <div class="budget-row-amount">$4,564–$10,430</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="timeline-section reveal" id="timeline">
+  <div class="timeline-inner">
+    <div class="timeline-header">
+      <div class="section-tag" style="justify-content:center;">Critical Path</div>
+      <h2 class="section-headline">The right order<br/><em>matters.</em></h2>
+      <p>Some steps unlock others. Don't buy marketing before you have insurance. Don't take clients before you have a contract.</p>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">Week 1</div>
+        <div class="timeline-event">Search name → File LLC → Get EIN</div>
+        <div class="timeline-body">Check Sunbiz for name availability. File Articles of Organization online ($125). Apply for EIN at IRS.gov same day. Order registered agent service.</div>
+        <div class="timeline-tags">
+          <span class="tl-tag tl-legal">Legal</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">Week 2</div>
+        <div class="timeline-event">Open business bank account → Sign operating agreement</div>
+        <div class="timeline-body">Bring EIN + Articles of Organization to open business checking. Draft or purchase operating agreement. Keep personal and business finances completely separate from this moment forward.</div>
+        <div class="timeline-tags">
+          <span class="tl-tag tl-legal">Legal</span>
+          <span class="tl-tag tl-ops">Operations</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">Week 2–3</div>
+        <div class="timeline-event">Purchase professional liability insurance</div>
+        <div class="timeline-body">Apply at cphins.com/patient-advocate. Add general liability and cyber riders. Do this before you talk to any potential client. Policy issued within minutes.</div>
+        <div class="timeline-tags">
+          <span class="tl-tag tl-insurance">Insurance</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">Weeks 3–8</div>
+        <div class="timeline-event">Build website + set up HIPAA-compliant tools</div>
+        <div class="timeline-body">Book headshot photographer. Register domain. Build or commission website. Set up Hushmail + SimplePractice/Jane App. Get BAAs signed with each vendor.</div>
+        <div class="timeline-tags">
+          <span class="tl-tag tl-marketing">Marketing</span>
+          <span class="tl-tag tl-ops">Operations</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">Month 2</div>
+        <div class="timeline-event">Join APHA → List in AdvoConnection → Set up bookkeeping</div>
+        <div class="timeline-body">Join APHA (start with PACE, upgrade to Premium). Create directory profile. Set up Wave or QuickBooks. Find a CPA for Year 1 tax strategy. Print business cards and brochures.</div>
+        <div class="timeline-tags">
+          <span class="tl-tag tl-marketing">Marketing</span>
+          <span class="tl-tag tl-ops">Operations</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">Months 2–4</div>
+        <div class="timeline-event">Begin BCPA exam prep → Register for next cycle</div>
+        <div class="timeline-body">Purchase study materials. Secure two recommendation letters. Submit application to PACB. Spring exams begin in March; Fall exams begin in September. Consider the scholarship application.</div>
+        <div class="timeline-tags">
+          <span class="tl-tag tl-cert">Certification</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">Month 2–3</div>
+        <div class="timeline-event">Start taking clients + building referral relationships</div>
+        <div class="timeline-body">You can start with clients before BCPA certification — your nursing background and insurance are sufficient. Target 1 coffee meeting/week with discharge planners, elder law attorneys, and geriatric care managers in your area.</div>
+        <div class="timeline-tags">
+          <span class="tl-tag tl-marketing">Client development</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">Month 4–6</div>
+        <div class="timeline-event">BCPA exam + credential update</div>
+        <div class="timeline-body">Sit the exam. Once BCPA certified, update all materials, website, directory listing, and LinkedIn. This is the credential that separates a side-project from a professional practice.</div>
+        <div class="timeline-tags">
+          <span class="tl-tag tl-cert">Certification</span>
+          <span class="tl-tag tl-marketing">Marketing update</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRESS / CTA -->
+<section class="cta-section reveal">
+  <div class="cta-inner">
+    <div class="section-tag" style="justify-content:center;">Your Progress</div>
+    <h2 class="section-headline">Check things off<br/><em>as you go.</em></h2>
+    <p>Every item above is clickable. Work through them phase by phase, and watch Willow Care Co. take shape.</p>
+    <div class="progress-summary">
+      <div class="progress-label">Tasks completed</div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+      <div class="progress-note"><span id="progress-count">0</span> of <span id="total-count">0</span> tasks complete</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Willow<span>Care</span> Co.</div>
+  <div class="footer-legal">
+    This business plan was prepared as a planning document for Willow Care Co. and is intended for the sole use of its founder. All services delivered within Florida LPN scope of practice. Willow Care Co. provides care navigation, patient advocacy, and health education — not clinical diagnosis or medical treatment.
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(r => observer.observe(r));
+
+  // Todo toggle
+  function toggleTodo(item) {
+    item.classList.toggle('done');
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const all = document.querySelectorAll('.todo-item');
+    const done = document.querySelectorAll('.todo-item.done');
+    const pct = all.length ? Math.round((done.length / all.length) * 100) : 0;
+    document.getElementById('progressBar').style.width = pct + '%';
+    document.getElementById('progress-count').textContent = done.length;
+    document.getElementById('total-count').textContent = all.length;
+  }
+
+  // Init count
+  window.addEventListener('load', updateProgress);
+</script>
+</body>
+</html>
