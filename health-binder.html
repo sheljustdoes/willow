@@ -1,0 +1,1964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Willow Care Co. — Health Binder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --sage:       #7A8C6E;
+    --sage-light: #B5C4A8;
+    --sage-pale:  #EDF1E9;
+    --warm:       #C4A882;
+    --warm-pale:  #F7F1E8;
+    --ink:        #1C2018;
+    --ink-soft:   #3D4237;
+    --mist:       #F4F5F1;
+    --white:      #FAFAF8;
+    --serif:      'Cormorant Garamond', Georgia, serif;
+    --sans:       'DM Sans', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--white);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    nav, .no-print { display: none !important; }
+    body { background: white; }
+    .cover { min-height: auto; page-break-after: always; }
+    .binder-section { page-break-inside: avoid; }
+    .tab-nav { display: none; }
+    .tab-panel { display: block !important; opacity: 1 !important; }
+    .section-divider { page-break-before: always; }
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(250,250,248,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(122,140,110,0.12);
+    animation: fadeDown 0.8s ease both;
+  }
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--sage); }
+  .nav-badge {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--sage);
+    background: var(--sage-pale);
+    padding: 0.35rem 1rem;
+    border-radius: 2rem;
+    border: 1px solid rgba(122,140,110,0.2);
+  }
+  .nav-actions { display: flex; gap: 0.8rem; align-items: center; }
+  .nav-btn {
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: var(--ink-soft);
+    background: none;
+    border: 1px solid rgba(122,140,110,0.25);
+    padding: 0.45rem 1.1rem;
+    border-radius: 2rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: var(--sans);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .nav-btn:hover { border-color: var(--sage); color: var(--sage); }
+  .nav-btn.primary {
+    background: var(--sage);
+    color: var(--white);
+    border-color: var(--sage);
+  }
+  .nav-btn.primary:hover { background: var(--ink); border-color: var(--ink); color: var(--white); }
+
+  /* ── COVER ── */
+  .cover {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 4.5rem;
+    position: relative;
+    overflow: hidden;
+    background: var(--white);
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(181,196,168,0.2) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .cover-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5rem 3rem 5rem 4rem;
+    animation: fadeUp 0.9s 0.1s ease both;
+  }
+  .cover-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 1.4rem;
+  }
+  .cover-eyebrow::before {
+    content: '';
+    width: 28px; height: 1px;
+    background: var(--sage);
+    display: block;
+  }
+  .cover-title {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 5vw, 5rem);
+    font-weight: 300;
+    line-height: 1.06;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+  .cover-title em { font-style: italic; color: var(--sage); }
+  .cover-subtitle {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-soft);
+    margin-bottom: 2.5rem;
+    line-height: 1.4;
+  }
+
+  /* Patient info block on cover */
+  .patient-summary {
+    background: var(--mist);
+    border-radius: 1.2rem;
+    padding: 1.8rem;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(122,140,110,0.1);
+    max-width: 460px;
+  }
+  .patient-summary-label {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .patient-summary-label::before { content: ''; width: 14px; height: 1px; background: var(--sage); }
+  .patient-field {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 0.2rem 0.8rem;
+    align-items: baseline;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(122,140,110,0.08);
+  }
+  .patient-field:last-child { border-bottom: none; }
+  .field-label {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .field-value {
+    font-size: 0.92rem;
+    color: var(--ink);
+    font-weight: 400;
+  }
+  .field-value.editable {
+    border-bottom: 1px dashed rgba(122,140,110,0.35);
+    outline: none;
+    min-width: 100px;
+    padding: 0 2px;
+    transition: border-color 0.2s;
+    background: transparent;
+  }
+  .field-value.editable:focus { border-color: var(--sage); }
+  .field-value.editable:empty::before {
+    content: attr(data-placeholder);
+    color: rgba(61,66,55,0.35);
+    font-style: italic;
+  }
+
+  .cover-meta {
+    display: flex;
+    gap: 2rem;
+    padding-top: 1.8rem;
+    border-top: 1px solid rgba(122,140,110,0.15);
+    max-width: 460px;
+  }
+  .meta-item { display: flex; flex-direction: column; gap: 0.15rem; }
+  .meta-label {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--sage);
+  }
+  .meta-value {
+    font-family: var(--serif);
+    font-size: 1rem;
+    color: var(--ink);
+  }
+
+  .cover-right {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem;
+    background: var(--sage-pale);
+    animation: fadeUp 0.9s 0.25s ease both;
+  }
+
+  /* Section index on cover right */
+  .section-index {
+    width: 100%;
+    max-width: 360px;
+  }
+  .index-title {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .index-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(122,140,110,0.2);
+  }
+  .index-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.85rem 1rem;
+    border-radius: 0.8rem;
+    margin-bottom: 0.4rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-decoration: none;
+    color: inherit;
+  }
+  .index-item:hover { background: rgba(122,140,110,0.1); }
+  .index-num {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--sage);
+    opacity: 0.5;
+    width: 28px;
+    flex-shrink: 0;
+    text-align: right;
+  }
+  .index-icon {
+    font-size: 1.1rem;
+    width: 36px; height: 36px;
+    background: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(28,32,24,0.06);
+  }
+  .index-text strong {
+    display: block;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+  .index-text span {
+    font-size: 0.73rem;
+    color: var(--ink-soft);
+  }
+
+  .willow-watermark {
+    position: absolute;
+    bottom: 2rem; right: 2rem;
+    font-family: var(--serif);
+    font-size: 0.8rem;
+    font-style: italic;
+    color: rgba(122,140,110,0.45);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── TAB NAVIGATION ── */
+  .tab-nav {
+    position: sticky;
+    top: 4.2rem;
+    z-index: 90;
+    background: var(--white);
+    border-bottom: 1px solid rgba(122,140,110,0.12);
+    padding: 0 4rem;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tab-nav::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 0.9rem 1.4rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.2s, border-color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .tab-btn:hover { color: var(--sage); }
+  .tab-btn.active { color: var(--sage); border-bottom-color: var(--sage); font-weight: 500; }
+  .tab-btn .tab-icon { font-size: 0.9rem; }
+
+  /* ── TAB PANELS ── */
+  .tab-panel {
+    display: none;
+    animation: fadeUp 0.4s ease both;
+  }
+  .tab-panel.active { display: block; }
+
+  /* ── BINDER SECTION WRAPPER ── */
+  .binder-section {
+    padding: 5rem 4rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .binder-section + .binder-section {
+    padding-top: 0;
+  }
+
+  /* Section header */
+  .section-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(122,140,110,0.12);
+  }
+  .section-tag {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .section-tag::before { content: ''; width: 18px; height: 1px; background: var(--sage); }
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 3vw, 2.8rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--ink);
+  }
+  .section-title em { font-style: italic; color: var(--sage); }
+  .section-num {
+    font-family: var(--serif);
+    font-size: 5rem;
+    font-weight: 300;
+    color: rgba(122,140,110,0.1);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .last-updated {
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+    margin-top: 0.5rem;
+  }
+  .last-updated span { color: var(--sage); font-weight: 500; }
+
+  /* ── FORM FIELDS ── */
+  .form-grid {
+    display: grid;
+    gap: 0;
+  }
+  .form-grid-2 { grid-template-columns: 1fr 1fr; gap: 0 2rem; }
+  .form-grid-3 { grid-template-columns: 1fr 1fr 1fr; gap: 0 2rem; }
+
+  .form-group {
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(122,140,110,0.08);
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    align-items: baseline;
+    gap: 1rem;
+  }
+  .form-group.full { grid-template-columns: 1fr; gap: 0.4rem; }
+  .form-label {
+    font-size: 0.73rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    padding-top: 2px;
+  }
+  .form-input {
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--ink);
+    background: transparent;
+    border: none;
+    border-bottom: 1px dashed rgba(122,140,110,0.3);
+    outline: none;
+    padding: 2px 4px;
+    width: 100%;
+    transition: border-color 0.2s;
+    line-height: 1.6;
+  }
+  .form-input:focus { border-color: var(--sage); }
+  .form-input::placeholder { color: rgba(61,66,55,0.3); font-style: italic; }
+  textarea.form-input {
+    resize: vertical;
+    min-height: 72px;
+    border: 1px dashed rgba(122,140,110,0.3);
+    border-radius: 0.5rem;
+    padding: 0.6rem 0.8rem;
+    margin-top: 0.4rem;
+  }
+  textarea.form-input:focus { border-color: var(--sage); }
+
+  /* ── CARDS ── */
+  .cards-grid {
+    display: grid;
+    gap: 1rem;
+  }
+  .cards-grid-2 { grid-template-columns: 1fr 1fr; }
+  .cards-grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+
+  .binder-card {
+    background: var(--mist);
+    border: 1px solid rgba(122,140,110,0.1);
+    border-radius: 1.1rem;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+  .binder-card:hover { box-shadow: 0 6px 24px rgba(28,32,24,0.07); }
+  .binder-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 0;
+    background: var(--sage);
+    transition: height 0.35s;
+    border-radius: 0 0 3px 0;
+  }
+  .binder-card:hover::before { height: 100%; }
+  .binder-card.alert { border-color: rgba(180,100,80,0.2); background: rgba(180,100,80,0.04); }
+  .binder-card.alert::before { background: #c46040; }
+  .binder-card.featured { background: var(--sage); border-color: var(--sage); }
+  .binder-card.featured .card-title { color: white; }
+  .binder-card.featured .form-label { color: rgba(255,255,255,0.7); }
+  .binder-card.featured .form-input { color: white; border-color: rgba(255,255,255,0.3); }
+  .binder-card.featured .form-input::placeholder { color: rgba(255,255,255,0.3); }
+
+  .card-icon { font-size: 1.4rem; margin-bottom: 0.8rem; }
+  .card-title {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+    line-height: 1.3;
+  }
+  .card-subtitle {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 1rem;
+  }
+
+  /* ── MEDICATION TABLE ── */
+  .med-table-wrap {
+    background: var(--white);
+    border: 1px solid rgba(122,140,110,0.12);
+    border-radius: 1.1rem;
+    overflow: hidden;
+    margin-bottom: 1rem;
+  }
+  .med-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .med-table th {
+    background: var(--sage-pale);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--sage);
+    padding: 0.7rem 1.2rem;
+    text-align: left;
+    white-space: nowrap;
+  }
+  .med-table td {
+    padding: 0.75rem 1.2rem;
+    border-bottom: 1px solid rgba(122,140,110,0.07);
+    vertical-align: middle;
+  }
+  .med-table tr:last-child td { border-bottom: none; }
+  .med-table td input {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: var(--ink);
+    background: transparent;
+    border: none;
+    border-bottom: 1px dashed rgba(122,140,110,0.25);
+    outline: none;
+    padding: 2px 4px;
+    width: 100%;
+    transition: border-color 0.2s;
+  }
+  .med-table td input:focus { border-color: var(--sage); }
+  .med-table td input::placeholder { color: rgba(61,66,55,0.3); font-style: italic; font-size: 0.8rem; }
+  .med-table .add-row {
+    background: var(--mist);
+    padding: 0.5rem 1.2rem;
+    border-top: 1px solid rgba(122,140,110,0.08);
+  }
+  .add-btn {
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--sage);
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0;
+    transition: color 0.2s;
+    text-transform: uppercase;
+  }
+  .add-btn:hover { color: var(--ink); }
+  .add-btn::before { content: '+'; font-size: 1rem; font-weight: 300; }
+  .delete-btn {
+    background: none;
+    border: none;
+    color: rgba(180,100,80,0.4);
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0 4px;
+    transition: color 0.2s;
+    line-height: 1;
+  }
+  .delete-btn:hover { color: #c46040; }
+
+  /* ── SPECIALIST CONTACTS ── */
+  .contact-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+  .contact-card {
+    background: var(--white);
+    border: 1px solid rgba(122,140,110,0.12);
+    border-radius: 1rem;
+    padding: 1.4rem;
+    position: relative;
+  }
+  .contact-specialty {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 0.6rem;
+  }
+  .contact-inputs { display: flex; flex-direction: column; gap: 0.5rem; }
+  .contact-inputs input {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    color: var(--ink);
+    background: transparent;
+    border: none;
+    border-bottom: 1px dashed rgba(122,140,110,0.25);
+    outline: none;
+    padding: 2px 4px;
+    width: 100%;
+    transition: border-color 0.2s;
+    font-weight: 300;
+  }
+  .contact-inputs input:focus { border-color: var(--sage); }
+  .contact-inputs input::placeholder { color: rgba(61,66,55,0.3); font-style: italic; font-size: 0.8rem; }
+  .contact-inputs input.name-input { font-weight: 500; font-size: 0.92rem; }
+  .add-contact-btn {
+    background: var(--mist);
+    border: 1px dashed rgba(122,140,110,0.3);
+    border-radius: 1rem;
+    padding: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--sage);
+    cursor: pointer;
+    transition: all 0.2s;
+    border-style: dashed;
+    text-transform: uppercase;
+  }
+  .add-contact-btn:hover { background: var(--sage-pale); border-color: var(--sage); }
+
+  /* ── TIMELINE / CARE PLAN ── */
+  .care-timeline {
+    position: relative;
+    padding-left: 3rem;
+  }
+  .care-timeline::before {
+    content: '';
+    position: absolute;
+    left: 0.5rem; top: 8px; bottom: 8px;
+    width: 1px;
+    background: repeating-linear-gradient(180deg, var(--sage) 0, var(--sage) 6px, transparent 6px, transparent 14px);
+  }
+  .timeline-entry {
+    position: relative;
+    margin-bottom: 1.5rem;
+    background: var(--white);
+    border: 1px solid rgba(122,140,110,0.1);
+    border-radius: 1rem;
+    padding: 1.3rem 1.4rem;
+    transition: box-shadow 0.2s;
+  }
+  .timeline-entry:hover { box-shadow: 0 4px 16px rgba(28,32,24,0.06); }
+  .timeline-dot {
+    position: absolute;
+    left: -2.8rem;
+    top: 1.1rem;
+    width: 14px; height: 14px;
+    background: var(--white);
+    border: 2px solid var(--sage);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .timeline-dot::after {
+    content: '';
+    width: 5px; height: 5px;
+    background: var(--sage);
+    border-radius: 50%;
+  }
+  .timeline-entry-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 80px;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 0.8rem;
+  }
+  .timeline-entry-body input,
+  .timeline-entry-body textarea {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    color: var(--ink);
+    background: transparent;
+    border: none;
+    border-bottom: 1px dashed rgba(122,140,110,0.25);
+    outline: none;
+    padding: 2px 4px;
+    width: 100%;
+    font-weight: 300;
+    transition: border-color 0.2s;
+  }
+  .timeline-entry-body textarea {
+    border: 1px dashed rgba(122,140,110,0.25);
+    border-radius: 0.4rem;
+    padding: 0.5rem 0.7rem;
+    min-height: 52px;
+    resize: vertical;
+    margin-top: 0.5rem;
+    display: block;
+  }
+  .timeline-entry-body input:focus,
+  .timeline-entry-body textarea:focus { border-color: var(--sage); }
+  .timeline-entry-body input::placeholder,
+  .timeline-entry-body textarea::placeholder { color: rgba(61,66,55,0.3); font-style: italic; font-size: 0.8rem; }
+  .add-timeline-btn {
+    margin-left: -3rem;
+    width: calc(100% + 3rem);
+    background: var(--mist);
+    border: 1px dashed rgba(122,140,110,0.25);
+    border-radius: 0.8rem;
+    padding: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--sage);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .add-timeline-btn:hover { background: var(--sage-pale); }
+
+  /* ── ALERT / WARNING SECTION ── */
+  .alert-block {
+    background: rgba(180,100,80,0.06);
+    border: 1px solid rgba(180,100,80,0.2);
+    border-radius: 1.1rem;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .alert-block-title {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #a04030;
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  /* ── NOTES SECTION ── */
+  .notes-area {
+    background: var(--white);
+    border: 1px solid rgba(122,140,110,0.12);
+    border-radius: 1.1rem;
+    overflow: hidden;
+    margin-bottom: 1rem;
+  }
+  .notes-header {
+    background: var(--sage-pale);
+    padding: 0.8rem 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .notes-header-title {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--sage);
+  }
+  .notes-date {
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+  }
+  .notes-body {
+    padding: 1.2rem 1.4rem;
+  }
+  .notes-body textarea {
+    font-family: var(--sans);
+    font-size: 0.88rem;
+    font-weight: 300;
+    color: var(--ink);
+    background: transparent;
+    border: none;
+    outline: none;
+    width: 100%;
+    min-height: 120px;
+    resize: vertical;
+    line-height: 1.75;
+  }
+  .notes-body textarea::placeholder { color: rgba(61,66,55,0.3); font-style: italic; }
+  .add-note-btn {
+    margin: 0 1.4rem 1.2rem;
+    background: none;
+    border: 1px dashed rgba(122,140,110,0.25);
+    border-radius: 0.6rem;
+    padding: 0.5rem 1rem;
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--sage);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: all 0.2s;
+  }
+  .add-note-btn:hover { background: var(--sage-pale); border-color: var(--sage); }
+  .add-note-btn::before { content: '+'; font-size: 1rem; font-weight: 300; }
+
+  /* ── FOOTER STRIP ── */
+  .binder-footer {
+    background: var(--ink);
+    padding: 2rem 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .binder-footer-logo {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--white);
+  }
+  .binder-footer-logo span { color: var(--sage-light); }
+  .binder-footer-info {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.35);
+    line-height: 1.6;
+    text-align: right;
+  }
+  .binder-footer-contact {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.55);
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .binder-footer-contact span { display: flex; align-items: center; gap: 0.4rem; }
+
+  /* ── DIVIDER ── */
+  .section-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(122,140,110,0.2), transparent);
+    margin: 0 4rem;
+  }
+
+  /* ── TAGS ── */
+  .tag-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.8rem; }
+  .tag {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.7rem;
+    border-radius: 2rem;
+  }
+  .tag-sage { background: var(--sage-pale); color: var(--sage); border: 1px solid rgba(122,140,110,0.15); }
+  .tag-warm { background: rgba(196,168,130,0.15); color: #8a6f40; }
+  .tag-alert { background: rgba(180,100,80,0.1); color: #a04030; }
+
+  /* ── UTILITY ── */
+  .mt-1 { margin-top: 1rem; }
+  .mt-2 { margin-top: 2rem; }
+  .mt-3 { margin-top: 3rem; }
+  .mb-1 { margin-bottom: 1rem; }
+  .mb-2 { margin-bottom: 2rem; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.4rem; }
+    .cover { grid-template-columns: 1fr; }
+    .cover-right { display: none; }
+    .cover-left { padding: 4rem 1.6rem; }
+    .tab-nav { padding: 0 1rem; }
+    .binder-section { padding: 3rem 1.6rem; }
+    .form-group { grid-template-columns: 1fr; }
+    .form-grid-2, .form-grid-3 { grid-template-columns: 1fr; }
+    .cards-grid-2, .cards-grid-3 { grid-template-columns: 1fr; }
+    .section-header { flex-direction: column; gap: 0.5rem; }
+    .section-num { display: none; }
+    .contact-cards { grid-template-columns: 1fr; }
+    .binder-footer { flex-direction: column; padding: 1.8rem 1.6rem; }
+    .binder-footer-info { text-align: left; }
+    .section-divider { margin: 0 1.6rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="no-print">
+  <a href="#" class="nav-logo">Willow<span>Care</span> Co.</a>
+  <span class="nav-badge">Health Binder</span>
+  <div class="nav-actions">
+    <button class="nav-btn" onclick="window.print()">🖨 Print Binder</button>
+    <button class="nav-btn primary" onclick="exportBinder()">↓ Save as PDF</button>
+  </div>
+</nav>
+
+<!-- COVER -->
+<section class="cover" id="cover">
+  <div class="cover-left">
+    <div class="cover-eyebrow">Willow Care Co. · Personalized Care Package</div>
+    <h1 class="cover-title">
+      Health<br/>
+      <em>Binder.</em>
+    </h1>
+    <p class="cover-subtitle">Everything in one place.<br/>Prepared for your family.</p>
+
+    <div class="patient-summary">
+      <div class="patient-summary-label">Patient Information</div>
+      <div class="patient-field">
+        <span class="field-label">Full Name</span>
+        <span class="field-value editable" contenteditable="true" data-placeholder="Patient full name"></span>
+      </div>
+      <div class="patient-field">
+        <span class="field-label">Date of Birth</span>
+        <span class="field-value editable" contenteditable="true" data-placeholder="MM / DD / YYYY"></span>
+      </div>
+      <div class="patient-field">
+        <span class="field-label">Primary Dx</span>
+        <span class="field-value editable" contenteditable="true" data-placeholder="Primary diagnosis"></span>
+      </div>
+      <div class="patient-field">
+        <span class="field-label">Blood Type</span>
+        <span class="field-value editable" contenteditable="true" data-placeholder="e.g. O+"></span>
+      </div>
+      <div class="patient-field">
+        <span class="field-label">Primary Insurance</span>
+        <span class="field-value editable" contenteditable="true" data-placeholder="Insurer · Member ID"></span>
+      </div>
+      <div class="patient-field">
+        <span class="field-label">Emergency Contact</span>
+        <span class="field-value editable" contenteditable="true" data-placeholder="Name · Relationship · Phone"></span>
+      </div>
+    </div>
+
+    <div class="cover-meta">
+      <div class="meta-item">
+        <span class="meta-label">Navigator</span>
+        <span class="meta-value">Shelby · Willow Care Co.</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Binder Created</span>
+        <span class="meta-value" id="binder-date"></span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Last Updated</span>
+        <span class="meta-value" id="last-updated"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="cover-right">
+    <div class="section-index">
+      <div class="index-title">Contents</div>
+      <a class="index-item" onclick="showTab('overview')">
+        <div class="index-num">01</div>
+        <div class="index-icon">🧬</div>
+        <div class="index-text">
+          <strong>Medical Overview</strong>
+          <span>Diagnoses, conditions, history</span>
+        </div>
+      </a>
+      <a class="index-item" onclick="showTab('medications')">
+        <div class="index-num">02</div>
+        <div class="index-icon">💊</div>
+        <div class="index-text">
+          <strong>Medications</strong>
+          <span>Current medications & schedule</span>
+        </div>
+      </a>
+      <a class="index-item" onclick="showTab('providers')">
+        <div class="index-num">03</div>
+        <div class="index-icon">👩‍⚕️</div>
+        <div class="index-text">
+          <strong>Care Team</strong>
+          <span>Providers & specialist contacts</span>
+        </div>
+      </a>
+      <a class="index-item" onclick="showTab('careplan')">
+        <div class="index-num">04</div>
+        <div class="index-icon">📋</div>
+        <div class="index-text">
+          <strong>Care Plan & Actions</strong>
+          <span>Timeline, follow-ups, next steps</span>
+        </div>
+      </a>
+      <a class="index-item" onclick="showTab('insurance')">
+        <div class="index-num">05</div>
+        <div class="index-icon">🛡️</div>
+        <div class="index-text">
+          <strong>Insurance & Legal</strong>
+          <span>Coverage, policies, directives</span>
+        </div>
+      </a>
+      <a class="index-item" onclick="showTab('notes')">
+        <div class="index-num">06</div>
+        <div class="index-icon">📝</div>
+        <div class="index-text">
+          <strong>Navigator Notes</strong>
+          <span>Appointment notes & observations</span>
+        </div>
+      </a>
+    </div>
+    <div class="willow-watermark">Willow Care Co. · Confidential</div>
+  </div>
+</section>
+
+<!-- TAB NAV -->
+<div class="tab-nav no-print">
+  <button class="tab-btn active" onclick="showTab('overview')"><span class="tab-icon">🧬</span> Medical Overview</button>
+  <button class="tab-btn" onclick="showTab('medications')"><span class="tab-icon">💊</span> Medications</button>
+  <button class="tab-btn" onclick="showTab('providers')"><span class="tab-icon">👩‍⚕️</span> Care Team</button>
+  <button class="tab-btn" onclick="showTab('careplan')"><span class="tab-icon">📋</span> Care Plan</button>
+  <button class="tab-btn" onclick="showTab('insurance')"><span class="tab-icon">🛡️</span> Insurance & Legal</button>
+  <button class="tab-btn" onclick="showTab('notes')"><span class="tab-icon">📝</span> Navigator Notes</button>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     TAB 1: MEDICAL OVERVIEW
+═══════════════════════════════════════════ -->
+<div class="tab-panel active" id="panel-overview">
+  <div class="binder-section">
+    <div class="section-header">
+      <div>
+        <div class="section-tag">Section 01</div>
+        <h2 class="section-title">Medical<br/><em>Overview</em></h2>
+        <div class="last-updated">Last updated: <span id="overview-updated">—</span></div>
+      </div>
+      <div class="section-num">01</div>
+    </div>
+
+    <!-- Diagnoses -->
+    <div class="mb-2">
+      <div class="card-subtitle">Active Diagnoses</div>
+      <div class="cards-grid cards-grid-2">
+        <div class="binder-card" id="dx-cards">
+          <div class="card-icon">🔴</div>
+          <div class="card-title">
+            <input class="form-input" placeholder="Diagnosis name" style="font-family:var(--serif);font-size:1.1rem;font-weight:600;color:var(--ink);"/>
+          </div>
+          <div class="form-group full" style="border:none;padding:0.3rem 0;">
+            <label class="form-label">ICD-10 Code</label>
+            <input class="form-input" placeholder="e.g. I10"/>
+          </div>
+          <div class="form-group full" style="border:none;padding:0.3rem 0;">
+            <label class="form-label">Diagnosed</label>
+            <input class="form-input" placeholder="Date or year"/>
+          </div>
+          <div class="form-group full" style="border:none;padding:0.3rem 0;">
+            <label class="form-label">Status</label>
+            <input class="form-input" placeholder="e.g. Managed, Active, Monitoring"/>
+          </div>
+        </div>
+        <div class="binder-card" style="background:var(--mist);border-style:dashed;display:flex;align-items:center;justify-content:center;cursor:pointer;min-height:180px;" onclick="addDiagnosis()">
+          <div style="text-align:center;color:var(--sage);">
+            <div style="font-size:2rem;margin-bottom:0.5rem;opacity:0.5;">+</div>
+            <div style="font-size:0.75rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;">Add Diagnosis</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-divider mb-2 mt-2" style="margin-left:0;margin-right:0;"></div>
+
+    <!-- Allergies & Alerts -->
+    <div class="mb-2">
+      <div class="card-subtitle">Allergies & Alerts</div>
+      <div class="alert-block">
+        <div class="alert-block-title">⚠️ Known Allergies</div>
+        <textarea class="form-input" placeholder="List all known allergies — medications, foods, environmental, contrast dye, latex, etc. Include type of reaction if known." style="border:1px dashed rgba(180,100,80,0.25);border-radius:0.5rem;padding:0.6rem 0.8rem;min-height:80px;width:100%;background:transparent;font-family:var(--sans);font-size:0.88rem;outline:none;font-weight:300;color:var(--ink);resize:vertical;transition:border-color 0.2s;"></textarea>
+      </div>
+      <div class="binder-card">
+        <div class="card-title" style="font-size:1rem;">Special Considerations</div>
+        <textarea class="form-input" placeholder="Fall risk, cognitive impairment, communication barriers, mobility limitations, dietary restrictions, religious considerations, DNR status, etc." style="min-height:80px;"></textarea>
+      </div>
+    </div>
+
+    <div class="section-divider mb-2 mt-2" style="margin-left:0;margin-right:0;"></div>
+
+    <!-- Medical History -->
+    <div class="mb-2">
+      <div class="card-subtitle">Relevant Medical History</div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Past Surgeries</label>
+          <textarea class="form-input" placeholder="Surgery name · Date · Facility" style="min-height:60px;"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Hospitalizations</label>
+          <textarea class="form-input" placeholder="Reason · Date · Duration" style="min-height:60px;"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Family History</label>
+          <textarea class="form-input" placeholder="Conditions relevant to current care" style="min-height:60px;"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Vaccinations</label>
+          <input class="form-input" placeholder="Flu · Pneumonia · Shingles · COVID · Dates"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Functional Status</label>
+          <input class="form-input" placeholder="e.g. Independent, needs assistance with ADLs, uses walker"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Cognitive Status</label>
+          <input class="form-input" placeholder="e.g. Alert & oriented x4, mild memory impairment"/>
+        </div>
+      </div>
+    </div>
+
+    <!-- Vitals baseline -->
+    <div class="card-subtitle mt-2">Baseline Vitals</div>
+    <div class="cards-grid cards-grid-3 mt-1">
+      <div class="binder-card" style="text-align:center;">
+        <div class="card-icon">❤️</div>
+        <div style="font-size:0.7rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--sage);margin-bottom:0.5rem;">Blood Pressure</div>
+        <input class="form-input" placeholder="e.g. 120/80" style="text-align:center;font-size:1.1rem;"/>
+      </div>
+      <div class="binder-card" style="text-align:center;">
+        <div class="card-icon">🫀</div>
+        <div style="font-size:0.7rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--sage);margin-bottom:0.5rem;">Heart Rate</div>
+        <input class="form-input" placeholder="e.g. 72 bpm" style="text-align:center;font-size:1.1rem;"/>
+      </div>
+      <div class="binder-card" style="text-align:center;">
+        <div class="card-icon">⚖️</div>
+        <div style="font-size:0.7rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--sage);margin-bottom:0.5rem;">Weight</div>
+        <input class="form-input" placeholder="e.g. 160 lbs" style="text-align:center;font-size:1.1rem;"/>
+      </div>
+      <div class="binder-card" style="text-align:center;">
+        <div class="card-icon">🌡️</div>
+        <div style="font-size:0.7rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--sage);margin-bottom:0.5rem;">Temperature</div>
+        <input class="form-input" placeholder="e.g. 98.6°F" style="text-align:center;font-size:1.1rem;"/>
+      </div>
+      <div class="binder-card" style="text-align:center;">
+        <div class="card-icon">🫁</div>
+        <div style="font-size:0.7rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--sage);margin-bottom:0.5rem;">O2 Saturation</div>
+        <input class="form-input" placeholder="e.g. 98%" style="text-align:center;font-size:1.1rem;"/>
+      </div>
+      <div class="binder-card" style="text-align:center;">
+        <div class="card-icon">📏</div>
+        <div style="font-size:0.7rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--sage);margin-bottom:0.5rem;">Height</div>
+        <input class="form-input" placeholder="e.g. 5'6&quot;" style="text-align:center;font-size:1.1rem;"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     TAB 2: MEDICATIONS
+═══════════════════════════════════════════ -->
+<div class="tab-panel" id="panel-medications">
+  <div class="binder-section">
+    <div class="section-header">
+      <div>
+        <div class="section-tag">Section 02</div>
+        <h2 class="section-title">Current<br/><em>Medications</em></h2>
+        <div class="last-updated">Last updated: <span id="med-updated">—</span></div>
+      </div>
+      <div class="section-num">02</div>
+    </div>
+
+    <!-- Medication table -->
+    <div class="card-subtitle mb-1">Prescription Medications</div>
+    <div class="med-table-wrap">
+      <table class="med-table">
+        <thead>
+          <tr>
+            <th style="width:22%">Medication Name</th>
+            <th style="width:12%">Dose</th>
+            <th style="width:18%">Frequency</th>
+            <th style="width:18%">Prescribing MD</th>
+            <th style="width:15%">Condition Treating</th>
+            <th style="width:10%">Start Date</th>
+            <th style="width:5%"></th>
+          </tr>
+        </thead>
+        <tbody id="rx-table-body">
+          <tr>
+            <td><input placeholder="Drug name (generic/brand)"/></td>
+            <td><input placeholder="e.g. 10mg"/></td>
+            <td><input placeholder="e.g. Once daily AM"/></td>
+            <td><input placeholder="Dr. Last Name"/></td>
+            <td><input placeholder="e.g. Hypertension"/></td>
+            <td><input placeholder="MM/YYYY"/></td>
+            <td><button class="delete-btn" onclick="deleteRow(this)" title="Remove">×</button></td>
+          </tr>
+          <tr>
+            <td><input placeholder="Drug name (generic/brand)"/></td>
+            <td><input placeholder="e.g. 20mg"/></td>
+            <td><input placeholder="e.g. Twice daily"/></td>
+            <td><input placeholder="Dr. Last Name"/></td>
+            <td><input placeholder="e.g. Diabetes"/></td>
+            <td><input placeholder="MM/YYYY"/></td>
+            <td><button class="delete-btn" onclick="deleteRow(this)" title="Remove">×</button></td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="7" class="add-row">
+              <button class="add-btn" onclick="addMedRow('rx-table-body')">Add Medication</button>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <!-- OTC table -->
+    <div class="card-subtitle mb-1 mt-2">Over-the-Counter & Supplements</div>
+    <div class="med-table-wrap">
+      <table class="med-table">
+        <thead>
+          <tr>
+            <th style="width:30%">Name / Brand</th>
+            <th style="width:15%">Dose</th>
+            <th style="width:20%">Frequency</th>
+            <th style="width:30%">Purpose / Notes</th>
+            <th style="width:5%"></th>
+          </tr>
+        </thead>
+        <tbody id="otc-table-body">
+          <tr>
+            <td><input placeholder="e.g. Vitamin D3, Aspirin 81mg"/></td>
+            <td><input placeholder="e.g. 1000 IU"/></td>
+            <td><input placeholder="e.g. Daily with food"/></td>
+            <td><input placeholder="e.g. Bone health, cardiovascular"/></td>
+            <td><button class="delete-btn" onclick="deleteRow(this)" title="Remove">×</button></td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="5" class="add-row">
+              <button class="add-btn" onclick="addOTCRow()">Add OTC / Supplement</button>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <!-- Pharmacy & notes -->
+    <div class="cards-grid cards-grid-2 mt-2">
+      <div class="binder-card featured">
+        <div class="card-icon">🏪</div>
+        <div class="card-title">Pharmacy</div>
+        <div class="form-group full" style="border:none;padding:0.3rem 0;">
+          <label class="form-label" style="color:rgba(255,255,255,0.65);">Name</label>
+          <input class="form-input" placeholder="Pharmacy name"/>
+        </div>
+        <div class="form-group full" style="border:none;padding:0.3rem 0;">
+          <label class="form-label" style="color:rgba(255,255,255,0.65);">Phone</label>
+          <input class="form-input" placeholder="(   )    -    "/>
+        </div>
+        <div class="form-group full" style="border:none;padding:0.3rem 0;">
+          <label class="form-label" style="color:rgba(255,255,255,0.65);">Address</label>
+          <input class="form-input" placeholder="Street address"/>
+        </div>
+        <div class="form-group full" style="border:none;padding:0.3rem 0;">
+          <label class="form-label" style="color:rgba(255,255,255,0.65);">Preferred Pharmacist</label>
+          <input class="form-input" placeholder="Name if known"/>
+        </div>
+      </div>
+      <div class="binder-card alert">
+        <div class="card-icon">⚠️</div>
+        <div class="card-title" style="color:#a04030;">Drug Interactions & Flags</div>
+        <textarea class="form-input" placeholder="Note any known drug interactions, contraindications, or medications that need monitoring. Include any medications recently stopped and why." style="border-color:rgba(180,100,80,0.25);min-height:120px;"></textarea>
+      </div>
+    </div>
+
+    <!-- Medication schedule visual aid -->
+    <div class="card-subtitle mt-3 mb-1">Daily Medication Schedule</div>
+    <div class="cards-grid cards-grid-3">
+      <div class="binder-card">
+        <div class="card-icon">🌅</div>
+        <div class="card-title">Morning</div>
+        <textarea class="form-input" placeholder="List medications taken in the morning, with food or fasting instructions..." style="min-height:100px;"></textarea>
+      </div>
+      <div class="binder-card">
+        <div class="card-icon">☀️</div>
+        <div class="card-title">Midday / Afternoon</div>
+        <textarea class="form-input" placeholder="List midday or afternoon medications..." style="min-height:100px;"></textarea>
+      </div>
+      <div class="binder-card">
+        <div class="card-icon">🌙</div>
+        <div class="card-title">Evening / Bedtime</div>
+        <textarea class="form-input" placeholder="List evening and bedtime medications..." style="min-height:100px;"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     TAB 3: CARE TEAM / PROVIDERS
+═══════════════════════════════════════════ -->
+<div class="tab-panel" id="panel-providers">
+  <div class="binder-section">
+    <div class="section-header">
+      <div>
+        <div class="section-tag">Section 03</div>
+        <h2 class="section-title">Care Team<br/><em>& Contacts</em></h2>
+        <div class="last-updated">Last updated: <span id="providers-updated">—</span></div>
+      </div>
+      <div class="section-num">03</div>
+    </div>
+
+    <div class="card-subtitle mb-1">Primary Care & Key Providers</div>
+    <div class="contact-cards" id="contact-cards-grid">
+
+      <!-- Primary Care -->
+      <div class="contact-card">
+        <div class="contact-specialty">Primary Care Physician</div>
+        <div class="contact-inputs">
+          <input class="name-input" placeholder="Dr. Full Name"/>
+          <input placeholder="Practice / Group name"/>
+          <input placeholder="Phone: (   )    -    "/>
+          <input placeholder="Fax: (   )    -    "/>
+          <input placeholder="Address"/>
+          <input placeholder="Patient Portal / Website"/>
+          <input placeholder="Next appointment date"/>
+        </div>
+      </div>
+
+      <!-- Specialist 1 -->
+      <div class="contact-card">
+        <div class="contact-specialty" contenteditable="true" style="outline:none;border-bottom:1px dashed rgba(122,140,110,0.3);padding-bottom:2px;">Specialist · Cardiology</div>
+        <div class="contact-inputs">
+          <input class="name-input" placeholder="Dr. Full Name"/>
+          <input placeholder="Practice / Group name"/>
+          <input placeholder="Phone: (   )    -    "/>
+          <input placeholder="Fax: (   )    -    "/>
+          <input placeholder="Address"/>
+          <input placeholder="Patient Portal / Website"/>
+          <input placeholder="Next appointment date"/>
+        </div>
+      </div>
+
+      <!-- Specialist 2 -->
+      <div class="contact-card">
+        <div class="contact-specialty" contenteditable="true" style="outline:none;border-bottom:1px dashed rgba(122,140,110,0.3);padding-bottom:2px;">Specialist · Click to edit</div>
+        <div class="contact-inputs">
+          <input class="name-input" placeholder="Dr. Full Name"/>
+          <input placeholder="Practice / Group name"/>
+          <input placeholder="Phone: (   )    -    "/>
+          <input placeholder="Fax: (   )    -    "/>
+          <input placeholder="Address"/>
+          <input placeholder="Patient Portal / Website"/>
+          <input placeholder="Next appointment date"/>
+        </div>
+      </div>
+
+      <!-- Add card -->
+      <button class="add-contact-btn" onclick="addContactCard()">+ Add Provider</button>
+    </div>
+
+    <div class="section-divider mt-3 mb-2" style="margin-left:0;margin-right:0;"></div>
+
+    <!-- Hospitals & Facilities -->
+    <div class="card-subtitle mb-1">Hospitals & Facilities</div>
+    <div class="cards-grid cards-grid-2">
+      <div class="binder-card">
+        <div class="card-icon">🏥</div>
+        <div class="card-title">Preferred Hospital</div>
+        <div class="form-group full" style="border:none;padding:0.2rem 0;">
+          <label class="form-label">Name</label>
+          <input class="form-input" placeholder="Hospital name"/>
+        </div>
+        <div class="form-group full" style="border:none;padding:0.2rem 0;">
+          <label class="form-label">Address</label>
+          <input class="form-input" placeholder="Street address, city"/>
+        </div>
+        <div class="form-group full" style="border:none;padding:0.2rem 0;">
+          <label class="form-label">ER Phone</label>
+          <input class="form-input" placeholder="(   )    -    "/>
+        </div>
+        <div class="form-group full" style="border:none;padding:0.2rem 0;">
+          <label class="form-label">Patient ID on file</label>
+          <input class="form-input" placeholder="Medical record number"/>
+        </div>
+      </div>
+      <div class="binder-card">
+        <div class="card-icon">🧪</div>
+        <div class="card-title">Lab & Imaging</div>
+        <div class="form-group full" style="border:none;padding:0.2rem 0;">
+          <label class="form-label">Preferred Lab</label>
+          <input class="form-input" placeholder="e.g. LabCorp, Quest, hospital lab"/>
+        </div>
+        <div class="form-group full" style="border:none;padding:0.2rem 0;">
+          <label class="form-label">Phone</label>
+          <input class="form-input" placeholder="(   )    -    "/>
+        </div>
+        <div class="form-group full" style="border:none;padding:0.2rem 0;">
+          <label class="form-label">Preferred Imaging</label>
+          <input class="form-input" placeholder="e.g. Radiology center name"/>
+        </div>
+        <div class="form-group full" style="border:none;padding:0.2rem 0;">
+          <label class="form-label">Phone</label>
+          <input class="form-input" placeholder="(   )    -    "/>
+        </div>
+      </div>
+    </div>
+
+    <!-- Willow Care navigator info -->
+    <div class="binder-card featured mt-2">
+      <div style="display:flex;align-items:center;gap:1rem;">
+        <div style="font-size:2rem;">🌿</div>
+        <div>
+          <div class="card-title">Your Willow Care Navigator</div>
+          <div style="font-size:0.82rem;color:rgba(255,255,255,0.75);line-height:1.6;">Shelby · Willow Care Co. · (850) 000-0000 · Florida LPN · Care Navigator</div>
+          <div style="font-size:0.78rem;color:rgba(255,255,255,0.5);margin-top:0.3rem;">Available Mon–Fri · For urgent medical emergencies call 911</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     TAB 4: CARE PLAN & ACTIONS
+═══════════════════════════════════════════ -->
+<div class="tab-panel" id="panel-careplan">
+  <div class="binder-section">
+    <div class="section-header">
+      <div>
+        <div class="section-tag">Section 04</div>
+        <h2 class="section-title">Care Plan<br/><em>& Next Steps</em></h2>
+        <div class="last-updated">Last updated: <span id="careplan-updated">—</span></div>
+      </div>
+      <div class="section-num">04</div>
+    </div>
+
+    <!-- Diagnosis summary -->
+    <div class="card-subtitle mb-1">Diagnosis Summary — In Plain Language</div>
+    <div class="binder-card mb-2">
+      <div class="card-icon">📖</div>
+      <div class="card-title">What We Know</div>
+      <textarea class="form-input" placeholder="Write a plain-language summary of the diagnosis here — what it is, what it means for daily life, and what the family needs to understand. Avoid clinical jargon. This section is written for the family, not for clinicians." style="min-height:120px;"></textarea>
+    </div>
+
+    <!-- Warning signs -->
+    <div class="alert-block mb-2">
+      <div class="alert-block-title">🚨 Warning Signs — When to Seek Care Immediately</div>
+      <textarea class="form-input" placeholder="List specific symptoms or changes that should trigger an immediate call to the provider or 911. Be specific and use plain language. (e.g., 'Chest pain or pressure lasting more than 5 minutes — call 911. Blood pressure above 180/120 — call Dr. Smith immediately.')" style="border-color:rgba(180,100,80,0.25);min-height:100px;width:100%;background:transparent;font-family:var(--sans);font-size:0.88rem;outline:none;font-weight:300;color:var(--ink);resize:vertical;transition:border-color 0.2s;border-radius:0.5rem;padding:0.6rem 0.8rem;"></textarea>
+    </div>
+
+    <!-- Follow-up timeline -->
+    <div class="card-subtitle mb-1">Follow-Up & Action Timeline</div>
+    <div class="care-timeline" id="care-timeline">
+
+      <div class="timeline-entry">
+        <div class="timeline-dot"></div>
+        <div class="timeline-entry-header">
+          <input placeholder="Date or timeframe (e.g. This week, Jan 15)" style="font-family:var(--sans);font-size:0.85rem;color:var(--ink);background:transparent;border:none;border-bottom:1px dashed rgba(122,140,110,0.25);outline:none;padding:2px 4px;font-weight:500;"/>
+          <input placeholder="Provider / Responsible party" style="font-family:var(--sans);font-size:0.85rem;color:var(--ink-soft);background:transparent;border:none;border-bottom:1px dashed rgba(122,140,110,0.25);outline:none;padding:2px 4px;font-weight:300;"/>
+          <select style="font-family:var(--sans);font-size:0.75rem;color:var(--sage);background:var(--sage-pale);border:1px solid rgba(122,140,110,0.2);border-radius:2rem;padding:0.2rem 0.6rem;outline:none;cursor:pointer;">
+            <option>Pending</option>
+            <option>Scheduled</option>
+            <option>Complete</option>
+            <option>Urgent</option>
+          </select>
+        </div>
+        <div class="timeline-entry-body">
+          <input placeholder="Action item or appointment" style="font-family:var(--sans);font-size:0.9rem;font-weight:500;color:var(--ink);background:transparent;border:none;border-bottom:1px dashed rgba(122,140,110,0.2);outline:none;padding:2px 4px;width:100%;"/>
+          <textarea placeholder="Notes, instructions, what to bring, what questions to ask..."></textarea>
+        </div>
+      </div>
+
+      <div class="timeline-entry">
+        <div class="timeline-dot"></div>
+        <div class="timeline-entry-header">
+          <input placeholder="Date or timeframe" style="font-family:var(--sans);font-size:0.85rem;color:var(--ink);background:transparent;border:none;border-bottom:1px dashed rgba(122,140,110,0.25);outline:none;padding:2px 4px;font-weight:500;"/>
+          <input placeholder="Provider / Responsible party" style="font-family:var(--sans);font-size:0.85rem;color:var(--ink-soft);background:transparent;border:none;border-bottom:1px dashed rgba(122,140,110,0.25);outline:none;padding:2px 4px;font-weight:300;"/>
+          <select style="font-family:var(--sans);font-size:0.75rem;color:var(--sage);background:var(--sage-pale);border:1px solid rgba(122,140,110,0.2);border-radius:2rem;padding:0.2rem 0.6rem;outline:none;cursor:pointer;">
+            <option>Pending</option>
+            <option>Scheduled</option>
+            <option>Complete</option>
+            <option>Urgent</option>
+          </select>
+        </div>
+        <div class="timeline-entry-body">
+          <input placeholder="Action item or appointment" style="font-family:var(--sans);font-size:0.9rem;font-weight:500;color:var(--ink);background:transparent;border:none;border-bottom:1px dashed rgba(122,140,110,0.2);outline:none;padding:2px 4px;width:100%;"/>
+          <textarea placeholder="Notes, instructions, what to bring, what questions to ask..."></textarea>
+        </div>
+      </div>
+
+    </div>
+    <button class="add-timeline-btn mt-1" onclick="addTimelineEntry()">+ Add Follow-Up Item</button>
+
+    <!-- Discharge summary (conditional use) -->
+    <div class="card-subtitle mt-3 mb-1">Discharge / Transition Summary</div>
+    <div class="cards-grid cards-grid-2">
+      <div class="binder-card">
+        <div class="card-icon">🏥</div>
+        <div class="card-title">Discharge From</div>
+        <div class="form-group full" style="border:none;padding:0.2rem 0;">
+          <label class="form-label">Facility</label>
+          <input class="form-input" placeholder="Hospital / rehab / facility name"/>
+        </div>
+        <div class="form-group full" style="border:none;padding:0.2rem 0;">
+          <label class="form-label">Discharge Date</label>
+          <input class="form-input" placeholder="MM / DD / YYYY"/>
+        </div>
+        <div class="form-group full" style="border:none;padding:0.2rem 0;">
+          <label class="form-label">Discharge Condition</label>
+          <input class="form-input" placeholder="e.g. Stable, improved, requires monitoring"/>
+        </div>
+        <div class="form-group full" style="border:none;padding:0.2rem 0;">
+          <label class="form-label">Activity Restrictions</label>
+          <input class="form-input" placeholder="e.g. No driving, limit stairs, bed rest"/>
+        </div>
+      </div>
+      <div class="binder-card">
+        <div class="card-icon">🏠</div>
+        <div class="card-title">Home Care Instructions</div>
+        <textarea class="form-input" placeholder="Wound care, diet restrictions, activity level, follow-up schedule, equipment needed at home, signs to watch for..." style="min-height:160px;"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     TAB 5: INSURANCE & LEGAL
+═══════════════════════════════════════════ -->
+<div class="tab-panel" id="panel-insurance">
+  <div class="binder-section">
+    <div class="section-header">
+      <div>
+        <div class="section-tag">Section 05</div>
+        <h2 class="section-title">Insurance<br/><em>& Legal Docs</em></h2>
+        <div class="last-updated">Last updated: <span id="insurance-updated">—</span></div>
+      </div>
+      <div class="section-num">05</div>
+    </div>
+
+    <!-- Insurance -->
+    <div class="card-subtitle mb-1">Insurance Coverage</div>
+    <div class="cards-grid cards-grid-2 mb-2">
+      <div class="binder-card featured">
+        <div class="card-icon">🛡️</div>
+        <div class="card-title">Primary Insurance</div>
+        <div class="form-group full" style="border:none;padding:0.2rem 0;">
+          <label class="form-label" style="color:rgba(255,255,255,0.65);">Insurer Name</label>
+          <input class="form-input" placeholder="e.g. UnitedHealthcare, Aetna, Medicare"/>
+        </div>
+        <div class="form-group full" style="border:none;padding:0.2rem 0;">
+          <label class="form-label" style="color:rgba(255,255,255,0.65);">Member ID</label>
+          <input class="form-input" placeholder="ID number on card"/>
+        </div>
+        <div class="form-group full" style="border:none;padding:0.2rem 0;">
+          <label class="form-label" style="color:rgba(255,255,255,0.65);">Group Number</label>
+          <input class="form-input" placeholder="Group #"/>
+        </div>
+        <div class="form-group full" style="border:none;padding:0.2rem 0;">
+          <label class="form-label" style="color:rgba(255,255,255,0.65);">Member Services</label>
+          <input class="form-input" placeholder="Phone number on back of card"/>
+        </div>
+        <div class="form-group full" style="border:none;padding:0.2rem 0;">
+          <label class="form-label" style="color:rgba(255,255,255,0.65);">Plan Year / Renewal</label>
+          <input class="form-input" placeholder="Dates"/>
+        </div>
+      </div>
+      <div class="binder-card">
+        <div class="card-icon">➕</div>
+        <div class="card-title">Secondary / Supplemental</div>
+        <div class="form-group full" style="border:none;padding:0.2rem 0;">
+          <label class="form-label">Insurer Name</label>
+          <input class="form-input" placeholder="e.g. Medigap, Medicare Part D, Medicaid"/>
+        </div>
+        <div class="form-group full" style="border:none;padding:0.2rem 0;">
+          <label class="form-label">Member ID</label>
+          <input class="form-input" placeholder="ID number"/>
+        </div>
+        <div class="form-group full" style="border:none;padding:0.2rem 0;">
+          <label class="form-label">Group Number</label>
+          <input class="form-input" placeholder="Group #"/>
+        </div>
+        <div class="form-group full" style="border:none;padding:0.2rem 0;">
+          <label class="form-label">Member Services</label>
+          <input class="form-input" placeholder="Phone number"/>
+        </div>
+        <div class="form-group full" style="border:none;padding:0.2rem 0;">
+          <label class="form-label">What It Covers</label>
+          <input class="form-input" placeholder="e.g. Part B supplement, prescriptions"/>
+        </div>
+      </div>
+    </div>
+
+    <!-- Key insurance info -->
+    <div class="cards-grid cards-grid-3 mb-3">
+      <div class="binder-card" style="text-align:center;">
+        <div class="card-icon">💰</div>
+        <div style="font-size:0.7rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--sage);margin-bottom:0.5rem;">Annual Deductible</div>
+        <input class="form-input" placeholder="$ Amount" style="text-align:center;font-size:1.1rem;"/>
+        <div style="font-size:0.72rem;color:var(--ink-soft);margin-top:0.5rem;">Met so far:</div>
+        <input class="form-input" placeholder="$" style="text-align:center;font-size:0.9rem;"/>
+      </div>
+      <div class="binder-card" style="text-align:center;">
+        <div class="card-icon">🔝</div>
+        <div style="font-size:0.7rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--sage);margin-bottom:0.5rem;">Out-of-Pocket Max</div>
+        <input class="form-input" placeholder="$ Amount" style="text-align:center;font-size:1.1rem;"/>
+      </div>
+      <div class="binder-card" style="text-align:center;">
+        <div class="card-icon">🏥</div>
+        <div style="font-size:0.7rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--sage);margin-bottom:0.5rem;">Primary Care Copay</div>
+        <input class="form-input" placeholder="$ Amount" style="text-align:center;font-size:1.1rem;"/>
+        <div style="font-size:0.72rem;color:var(--ink-soft);margin-top:0.5rem;">Specialist copay:</div>
+        <input class="form-input" placeholder="$" style="text-align:center;font-size:0.9rem;"/>
+      </div>
+    </div>
+
+    <!-- Legal documents -->
+    <div class="section-divider mb-2" style="margin-left:0;margin-right:0;"></div>
+    <div class="card-subtitle mb-1">Legal & Advance Directives</div>
+    <div class="cards-grid cards-grid-2">
+      <div class="binder-card">
+        <div class="card-icon">📄</div>
+        <div class="card-title">Healthcare Surrogate / POA</div>
+        <div class="form-group full" style="border:none;padding:0.2rem 0;">
+          <label class="form-label">Designee Name</label>
+          <input class="form-input" placeholder="Full name of designee"/>
+        </div>
+        <div class="form-group full" style="border:none;padding:0.2rem 0;">
+          <label class="form-label">Relationship</label>
+          <input class="form-input" placeholder="e.g. Daughter, spouse, attorney"/>
+        </div>
+        <div class="form-group full" style="border:none;padding:0.2rem 0;">
+          <label class="form-label">Phone</label>
+          <input class="form-input" placeholder="(   )    -    "/>
+        </div>
+        <div class="form-group full" style="border:none;padding:0.2rem 0;">
+          <label class="form-label">Document on file at</label>
+          <input class="form-input" placeholder="Location / attorney / hospital"/>
+        </div>
+        <div class="form-group full" style="border:none;padding:0.2rem 0;">
+          <label class="form-label">Date signed</label>
+          <input class="form-input" placeholder="MM / DD / YYYY"/>
+        </div>
+      </div>
+      <div class="binder-card">
+        <div class="card-icon">📋</div>
+        <div class="card-title">Living Will / Advance Directive</div>
+        <div class="form-group full" style="border:none;padding:0.2rem 0;">
+          <label class="form-label">Document exists?</label>
+          <select class="form-input" style="border:none;border-bottom:1px dashed rgba(122,140,110,0.3);">
+            <option value="">— Select —</option>
+            <option>Yes — on file</option>
+            <option>Yes — copy attached</option>
+            <option>No — not yet completed</option>
+            <option>In progress</option>
+          </select>
+        </div>
+        <div class="form-group full" style="border:none;padding:0.2rem 0;">
+          <label class="form-label">Location of original</label>
+          <input class="form-input" placeholder="Where the original document is kept"/>
+        </div>
+        <div class="form-group full" style="border:none;padding:0.2rem 0;">
+          <label class="form-label">DNR / DNI Status</label>
+          <select class="form-input" style="border:none;border-bottom:1px dashed rgba(122,140,110,0.3);">
+            <option value="">— Select —</option>
+            <option>Full code (no DNR)</option>
+            <option>DNR on file</option>
+            <option>DNI on file</option>
+            <option>DNR + DNI on file</option>
+            <option>POLST on file</option>
+          </select>
+        </div>
+        <div class="form-group full" style="border:none;padding:0.2rem 0;">
+          <label class="form-label">Attorney (if any)</label>
+          <input class="form-input" placeholder="Name · Phone"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     TAB 6: NAVIGATOR NOTES
+═══════════════════════════════════════════ -->
+<div class="tab-panel" id="panel-notes">
+  <div class="binder-section">
+    <div class="section-header">
+      <div>
+        <div class="section-tag">Section 06</div>
+        <h2 class="section-title">Navigator<br/><em>Notes</em></h2>
+        <div class="last-updated">Last updated: <span id="notes-updated">—</span></div>
+      </div>
+      <div class="section-num">06</div>
+    </div>
+
+    <div class="card-subtitle mb-1">Appointment Notes & Observations</div>
+    <div id="notes-container">
+      <div class="notes-area">
+        <div class="notes-header">
+          <span class="notes-header-title">Appointment Note</span>
+          <input type="text" placeholder="Date · Provider · Location" style="font-family:var(--sans);font-size:0.75rem;color:var(--ink-soft);background:transparent;border:none;outline:none;text-align:right;width:280px;"/>
+        </div>
+        <div class="notes-body">
+          <div style="margin-bottom:0.8rem;">
+            <input style="font-family:var(--sans);font-size:0.88rem;font-weight:500;color:var(--ink);background:transparent;border:none;border-bottom:1px dashed rgba(122,140,110,0.25);outline:none;padding:2px 4px;width:100%;" placeholder="Appointment title / purpose (e.g. Cardiology follow-up — post-discharge)"/>
+          </div>
+          <textarea placeholder="Detailed notes from the appointment. What was discussed, what the doctor said, what changed, what was ordered, what questions were asked and answered, what the family needs to know..."></textarea>
+        </div>
+        <div style="padding:0 1.4rem;">
+          <div style="font-size:0.7rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--sage);margin-bottom:0.5rem;">Action Items from This Visit</div>
+          <textarea style="font-family:var(--sans);font-size:0.85rem;font-weight:300;color:var(--ink);background:var(--mist);border:1px dashed rgba(122,140,110,0.2);border-radius:0.5rem;outline:none;padding:0.6rem 0.8rem;width:100%;min-height:60px;resize:vertical;transition:border-color 0.2s;" placeholder="Lab orders, referrals made, medication changes, follow-up needed, things the family needs to do..."></textarea>
+        </div>
+        <button class="add-note-btn" style="margin-top:0.8rem;">Add Follow-Up</button>
+      </div>
+    </div>
+
+    <button class="add-timeline-btn mt-1 mb-3" onclick="addNoteEntry()" style="margin-left:0;width:100%;">+ Add New Appointment Note</button>
+
+    <!-- Family communication log -->
+    <div class="section-divider mb-2" style="margin-left:0;margin-right:0;"></div>
+    <div class="card-subtitle mb-1">Family Communication Log</div>
+    <div class="notes-area">
+      <div class="notes-header">
+        <span class="notes-header-title">Family Updates & Conversations</span>
+      </div>
+      <div class="notes-body">
+        <textarea placeholder="Log significant conversations with family members here — who was briefed, what was explained, questions they raised, concerns noted, decisions discussed. Keep a running record of family communication..." style="min-height:160px;"></textarea>
+      </div>
+    </div>
+
+    <!-- Navigator observations -->
+    <div class="binder-card mt-2">
+      <div class="card-icon">🌿</div>
+      <div class="card-title">Navigator Observations & Concerns</div>
+      <textarea class="form-input" placeholder="Ongoing clinical observations, patterns noticed, concerns to raise at next appointment, changes in patient status, family dynamics relevant to care, gaps identified, recommendations made..." style="min-height:120px;"></textarea>
+    </div>
+
+    <!-- What the family needs to know -->
+    <div class="binder-card featured mt-1">
+      <div class="card-icon">👨‍👩‍👧</div>
+      <div class="card-title">What the Family Needs to Know</div>
+      <textarea class="form-input" placeholder="A plain-language summary written specifically for the family — the most important things to understand right now, what to watch for, what questions to ask at the next appointment, what Willow is tracking on their behalf..." style="min-height:120px;"></textarea>
+    </div>
+  </div>
+</div>
+
+
+<!-- FOOTER -->
+<footer class="binder-footer">
+  <div class="binder-footer-logo">Willow<span>Care</span> Co.</div>
+  <div class="binder-footer-contact">
+    <span>🌿 Nurse-led care navigation</span>
+    <span>📍 Florida · Serving families statewide</span>
+    <span>📞 (850) 000-0000</span>
+  </div>
+  <div class="binder-footer-info">
+    Willow Care Co. provides care navigation and health education.<br/>
+    Not a substitute for medical advice, diagnosis, or treatment.<br/>
+    All services within Florida LPN scope of practice. · Confidential.
+  </div>
+</footer>
+
+<script>
+  // ── Dates ──
+  const today = new Date();
+  const fmt = d => d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+  document.getElementById('binder-date').textContent = fmt(today);
+  document.getElementById('last-updated').textContent = fmt(today);
+  ['overview','med','providers','careplan','insurance','notes'].forEach(id => {
+    const el = document.getElementById(id + '-updated');
+    if (el) el.textContent = fmt(today);
+  });
+
+  // ── Tab navigation ──
+  function showTab(tabId) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-' + tabId).classList.add('active');
+    const btns = document.querySelectorAll('.tab-btn');
+    const map = { overview: 0, medications: 1, providers: 2, careplan: 3, insurance: 4, notes: 5 };
+    if (btns[map[tabId]]) btns[map[tabId]].classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ── Medication rows ──
+  function addMedRow(tbodyId) {
+    const tbody = document.getElementById(tbodyId);
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><input placeholder="Drug name (generic/brand)"/></td>
+      <td><input placeholder="e.g. 10mg"/></td>
+      <td><input placeholder="e.g. Once daily AM"/></td>
+      <td><input placeholder="Dr. Last Name"/></td>
+      <td><input placeholder="e.g. Hypertension"/></td>
+      <td><input placeholder="MM/YYYY"/></td>
+      <td><button class="delete-btn" onclick="deleteRow(this)" title="Remove">×</button></td>`;
+    tbody.appendChild(tr);
+  }
+
+  function addOTCRow() {
+    const tbody = document.getElementById('otc-table-body');
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><input placeholder="e.g. Vitamin D3, Fish Oil"/></td>
+      <td><input placeholder="e.g. 500mg"/></td>
+      <td><input placeholder="e.g. Daily with breakfast"/></td>
+      <td><input placeholder="e.g. Bone health, inflammation"/></td>
+      <td><button class="delete-btn" onclick="deleteRow(this)" title="Remove">×</button></td>`;
+    tbody.appendChild(tr);
+  }
+
+  function deleteRow(btn) {
+    btn.closest('tr').remove();
+  }
+
+  // ── Contact cards ──
+  function addContactCard() {
+    const grid = document.getElementById('contact-cards-grid');
+    const addBtn = grid.querySelector('.add-contact-btn');
+    const card = document.createElement('div');
+    card.className = 'contact-card';
+    card.innerHTML = `
+      <div class="contact-specialty" contenteditable="true" style="outline:none;border-bottom:1px dashed rgba(122,140,110,0.3);padding-bottom:2px;">Specialist · Click to edit</div>
+      <div class="contact-inputs">
+        <input class="name-input" placeholder="Dr. Full Name"/>
+        <input placeholder="Practice / Group name"/>
+        <input placeholder="Phone: (   )    -    "/>
+        <input placeholder="Fax: (   )    -    "/>
+        <input placeholder="Address"/>
+        <input placeholder="Patient Portal / Website"/>
+        <input placeholder="Next appointment date"/>
+      </div>`;
+    grid.insertBefore(card, addBtn);
+  }
+
+  // ── Timeline entries ──
+  function addTimelineEntry() {
+    const tl = document.getElementById('care-timeline');
+    const entry = document.createElement('div');
+    entry.className = 'timeline-entry';
+    entry.innerHTML = `
+      <div class="timeline-dot"></div>
+      <div class="timeline-entry-header">
+        <input placeholder="Date or timeframe" style="font-family:var(--sans);font-size:0.85rem;color:var(--ink);background:transparent;border:none;border-bottom:1px dashed rgba(122,140,110,0.25);outline:none;padding:2px 4px;font-weight:500;"/>
+        <input placeholder="Provider / Responsible party" style="font-family:var(--sans);font-size:0.85rem;color:var(--ink-soft);background:transparent;border:none;border-bottom:1px dashed rgba(122,140,110,0.25);outline:none;padding:2px 4px;font-weight:300;"/>
+        <select style="font-family:var(--sans);font-size:0.75rem;color:var(--sage);background:var(--sage-pale);border:1px solid rgba(122,140,110,0.2);border-radius:2rem;padding:0.2rem 0.6rem;outline:none;cursor:pointer;">
+          <option>Pending</option><option>Scheduled</option><option>Complete</option><option>Urgent</option>
+        </select>
+      </div>
+      <div class="timeline-entry-body">
+        <input placeholder="Action item or appointment" style="font-family:var(--sans);font-size:0.9rem;font-weight:500;color:var(--ink);background:transparent;border:none;border-bottom:1px dashed rgba(122,140,110,0.2);outline:none;padding:2px 4px;width:100%;"/>
+        <textarea placeholder="Notes, instructions, what to bring, what questions to ask..."></textarea>
+      </div>`;
+    tl.appendChild(entry);
+  }
+
+  // ── Diagnosis cards ──
+  function addDiagnosis() {
+    const grid = document.querySelector('#dx-cards').parentElement;
+    const addBtn = grid.querySelector('[onclick="addDiagnosis()"]');
+    const card = document.createElement('div');
+    card.className = 'binder-card';
+    card.innerHTML = `
+      <div class="card-icon">🔵</div>
+      <div class="card-title">
+        <input class="form-input" placeholder="Diagnosis name" style="font-family:var(--serif);font-size:1.1rem;font-weight:600;color:var(--ink);"/>
+      </div>
+      <div class="form-group full" style="border:none;padding:0.3rem 0;">
+        <label class="form-label">ICD-10 Code</label>
+        <input class="form-input" placeholder="e.g. E11.9"/>
+      </div>
+      <div class="form-group full" style="border:none;padding:0.3rem 0;">
+        <label class="form-label">Diagnosed</label>
+        <input class="form-input" placeholder="Date or year"/>
+      </div>
+      <div class="form-group full" style="border:none;padding:0.3rem 0;">
+        <label class="form-label">Status</label>
+        <input class="form-input" placeholder="e.g. Managed, Active, Monitoring"/>
+      </div>`;
+    grid.insertBefore(card, addBtn);
+  }
+
+  // ── Notes ──
+  function addNoteEntry() {
+    const container = document.getElementById('notes-container');
+    const block = document.createElement('div');
+    block.className = 'notes-area mt-1';
+    block.innerHTML = `
+      <div class="notes-header">
+        <span class="notes-header-title">Appointment Note</span>
+        <input type="text" placeholder="Date · Provider · Location" style="font-family:var(--sans);font-size:0.75rem;color:var(--ink-soft);background:transparent;border:none;outline:none;text-align:right;width:280px;"/>
+      </div>
+      <div class="notes-body">
+        <div style="margin-bottom:0.8rem;">
+          <input style="font-family:var(--sans);font-size:0.88rem;font-weight:500;color:var(--ink);background:transparent;border:none;border-bottom:1px dashed rgba(122,140,110,0.25);outline:none;padding:2px 4px;width:100%;" placeholder="Appointment title / purpose"/>
+        </div>
+        <textarea placeholder="Detailed notes from the appointment..."></textarea>
+      </div>
+      <div style="padding:0 1.4rem;">
+        <div style="font-size:0.7rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--sage);margin-bottom:0.5rem;">Action Items from This Visit</div>
+        <textarea style="font-family:var(--sans);font-size:0.85rem;font-weight:300;color:var(--ink);background:var(--mist);border:1px dashed rgba(122,140,110,0.2);border-radius:0.5rem;outline:none;padding:0.6rem 0.8rem;width:100%;min-height:60px;resize:vertical;transition:border-color 0.2s;" placeholder="Lab orders, referrals, medication changes, follow-ups needed..."></textarea>
+      </div>
+      <button class="add-note-btn" style="margin-top:0.8rem;">Add Follow-Up</button>`;
+    container.appendChild(block);
+    block.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // ── Print / Export ──
+  function exportBinder() {
+    window.print();
+  }
+</script>
+</body>
+</html>
